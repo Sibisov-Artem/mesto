@@ -10,6 +10,12 @@
   border-radius: 2px;
   padding: 0;
   border: none;
+  transition: opacity .4s ease;
+}
+
+.form__submit-btn:hover {
+  opacity: .8;
+  cursor: pointer;
 }
 
 @media screen and (max-width:611px) {
