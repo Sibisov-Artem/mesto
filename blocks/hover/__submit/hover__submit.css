@@ -1,0 +1,8 @@
+.hover__submit {
+  transition: opacity .4s ease;
+}
+
+.hover__submit:hover {
+  opacity: .8;
+  cursor: pointer;
+}
