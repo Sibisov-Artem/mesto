@@ -1,0 +1,9 @@
+.place {
+  padding-top: 51px;
+}
+
+@media screen and (max-width: 768px) {
+  .place {
+    padding-top: 36px;
+  }
+}

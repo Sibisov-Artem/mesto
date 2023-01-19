@@ -1,0 +1,21 @@
+.popup__container {
+  position: relative;
+  width: 430px;
+  height: 330px;
+  background-color: #FFF;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  top: -13px;
+  left: -8px;
+}
+
+
+@media screen and (max-width: 611px) {
+  .popup__container {
+    width: 282px;
+    height: 322px;
+    top: -46px;
+    left: 0;
+  }
+}
