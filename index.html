@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./pages/index.css">
-  <title>Mesto</title>
+  <title>Место</title>
 </head>
 
 <body class="root">
@@ -32,7 +32,9 @@
         <ul class="place__grid">
 
           <li class="place__card">
-            <img class="place__image" src="./images/karachaevsk.jpg" alt="Каменное строение Карачаевска">
+            <div class="place__image-wrapper">
+              <img class="place__image" src="./images/karachaevsk.jpg" alt="Каменное строение Карачаевска">
+            </div>
             <div class="place__info">
               <h2 class="place__title">Карачаевск</h2>
               <button class="place__like-btn hover" type="button"></button>
@@ -40,7 +42,9 @@
           </li>
 
           <li class="place__card">
-            <img class="place__image" src="./images/elbrus.jpg" alt="Гора Эльбрус">
+            <div class="place__image-wrapper">
+              <img class="place__image" src="./images/elbrus.jpg" alt="Гора Эльбрус">
+            </div>
             <div class="place__info">
               <h2 class="place__title">Гора Эльбрус</h2>
               <button class="place__like-btn hover" type="button"></button>
@@ -48,7 +52,9 @@
           </li>
 
           <li class="place__card">
-            <img class="place__image" src="./images/dumbai.jpg" alt="Гора Домбай">
+            <div class="place__image-wrapper">
+              <img class="place__image" src="./images/dumbai.jpg" alt="Гора Домбай">
+            </div>
             <div class="place__info">
               <h2 class="place__title">Домбай</h2>
               <button class="place__like-btn hover" type="button"></button>
@@ -56,7 +62,10 @@
           </li>
 
           <li class="place__card">
-            <img class="place__image" src="./images/maldives.jpg" alt="Остров на Мальдивах">
+            <div class="place__image-wrapper">
+              <img class="place__image" src="./images/maldives.jpg"
+                alt="Остров на Мальдивах с пальмами, и хижинами, к которому подплывает яхта по голубой бирюзовой воде">
+            </div>
             <div class="place__info">
               <h2 class="place__title">Мальдивы</h2>
               <button class="place__like-btn hover" type="button"></button>
@@ -64,7 +73,9 @@
           </li>
 
           <li class="place__card">
-            <img class="place__image" src="./images/olhon.jpg" alt="Мыс Бурхан на Байкале">
+            <div class="place__image-wrapper">
+              <img class="place__image" src="./images/olhon.jpg" alt="Мыс Бурхан на Байкале">
+            </div>
             <div class="place__info">
               <h2 class="place__title">Байкал</h2>
               <button class="place__like-btn hover" type="button"></button>
@@ -72,7 +83,9 @@
           </li>
 
           <li class="place__card">
-            <img class="place__image" src="./images/ruskeala.jpg" alt="Озеро среди гор парка Рускеала">
+            <div class="place__image-wrapper">
+              <img class="place__image" src="./images/ruskeala.jpg" alt="Озеро среди гор парка Рускеала">
+            </div>
             <div class="place__info">
               <h2 class="place__title">Парк Рускеала</h2>
               <button class="place__like-btn hover" type="button"></button>
@@ -92,13 +105,13 @@
   <div class="popup">
     <div class="popup__container">
       <button class="popup__close-btn hover" type="button"></button>
-      <form class="form">
-        <h2 class="form__title">Редактировать профиль</h2>
+      <h2 class="form__title">Редактировать профиль</h2>
+      <form class="form" name="form">
         <fieldset class="form__input-container">
-          <input class="form__item form__item_el_name" type="text">
-          <input class="form__item form__item_el_description" type="text">
+          <input class="form__item form__item_el_name" type="text" name="profileName">
+          <input class="form__item form__item_el_description" type="text" name="profileDescription">
         </fieldset>
-        <button class="form__submit-btn" type="button">Сохранить</button>
+        <button class="form__submit-btn" type="submit">Сохранить</button>
       </form>
     </div>
   </div>

@@ -1,13 +1,11 @@
 .form {
   max-width: 358px;
-  display: flex;
-  flex-direction: column;
-  padding: 34px 0 37px;
+  padding: 37px 0 37px;
 }
 
 @media screen and (max-width: 611px) {
   .form {
     max-width: 238px;
-    padding: 26px 0 0;
+    padding: 33px 0 25px;
   }
 }
