@@ -25,7 +25,6 @@
 @import url(../blocks/place/__grid/place__grid.css);
 @import url(../blocks/place/__card/place__card.css);
 @import url(../blocks/place/__image/place__image.css);
-@import url(../blocks/place/__image-wrapper/place__image-wrapper.css);
 @import url(../blocks/place/__info/place__info.css);
 @import url(../blocks/place/__title/place__title.css);
 @import url(../blocks/place/__like-btn/place__like-btn.css);
