@@ -10,8 +10,8 @@ const profileDescription = profile.querySelector('.profile__description'); //о�
 const editButton = profile.querySelector('.profile__edit-btn');  //кнопка открытия попап профиля
 
 const formElementProfile = popupProfile.querySelector('.form__profile'); //форма попап профиля
-const popupProfileName = popupProfile.querySelector('.form__item_el_name'); //поле имени профиля
-const popupProfileDescription = popupProfile.querySelector('.form__item_el_description'); //поле описания профиля
+const popupInputProfileName = popupProfile.querySelector('.form__item_el_name'); //поле имени профиля
+const popupInputProfileDescription = popupProfile.querySelector('.form__item_el_description'); //поле описания профиля
 
 const popupProfileCloseButton = document.querySelector('.popup_profile__close-btn'); //кнопка закрытия попап профиля
 
@@ -51,12 +51,33 @@ const initialCards = [
   }
 ];
 
-const template = querySelector('.card-template'); // тэмплейт
+const template = document.querySelector('.card-template').content.querySelector('.place__card'); // тэмплейт и его контент-карточка
+const list = document.querySelector('.place__grid'); // список, внутрь которого будут вставать карточки
+
+const formAddMesto = document.querySelector('.form__item_el_mesto-title'); //форма попап добавления места
+const popupInputMestoTitle = document.querySelector('.form__item_el_name'); //поле имени места
+const popupInputMestoUrlImage = document.querySelector('.form__item_el_description'); //поле адреса картинки
+
+// функция отображения карточек через forEach
+function renderCards() {
+  initialCards.forEach((item) => {
+    const card = template.cloneNode(true);
+    card.querySelector('.place__title').textContent = item.name;
+    card.querySelector('.place__image').src = item.link;
+    list.append(card);
+  })
+}
+
+renderCards();
+
+
+
+
 
 // функция открытия попап профиля
 function openPopupProfile() {
-  popupProfileName.value = profileName.textContent;
-  popupProfileDescription.value = profileDescription.textContent;
+  popupInputProfileName.value = profileName.textContent;
+  popupInputProfileDescription.value = profileDescription.textContent;
   popupProfile.classList.add('popup_opened');
 }
 
@@ -68,8 +89,8 @@ function closePopupProfile() {
 // функция сохранения профиля
 function saveProfile(evt) {
   evt.preventDefault();
-  profileName.textContent = popupProfileName.value;
-  profileDescription.textContent = popupProfileDescription.value;
+  profileName.textContent = popupInputProfileName.value;
+  profileDescription.textContent = popupInputProfileDescription.value;
   closePopupProfile();
 }
 
