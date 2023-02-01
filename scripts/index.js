@@ -23,6 +23,35 @@ const popupMestoCloseButton = document.querySelector('.popup_mesto__close-btn');
 
 const likeButton = document.querySelectorAll('.place__like-btn'); //кнопка лайк
 
+// набор начальных карточек
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
+const template = querySelector('.card-template'); // тэмплейт
 
 // функция открытия попап профиля
 function openPopupProfile() {
@@ -41,7 +70,7 @@ function saveProfile(evt) {
   evt.preventDefault();
   profileName.textContent = popupProfileName.value;
   profileDescription.textContent = popupProfileDescription.value;
-  closePopupProfile(popupProfile);
+  closePopupProfile();
 }
 
 // функция открытия попап добавления места

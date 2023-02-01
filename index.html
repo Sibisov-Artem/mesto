@@ -88,6 +88,7 @@
 
         </ul>
       </section>
+
     </main>
 
     <footer class="footer section page__section">
@@ -117,14 +118,24 @@
       <form class="form" name="form">
         <fieldset class="form__input-container">
           <input class="form__item form__item_el_mesto-title" type="text" name="mestoTitle" placeholder="Название">
-          <input class="form__item form__item_el_mesto-url" type="url" name="mestoUrlImage" placeholder="Ссылка на картинку">
+          <input class="form__item form__item_el_mesto-url" type="url" name="mestoUrlImage"
+            placeholder="Ссылка на картинку">
         </fieldset>
         <button class="form__submit-btn" type="submit">Создать</button>
       </form>
     </div>
   </div>
 
-  <template id="template">
+  <template class="card-template">
+
+    <li class="place__card">
+      <img class="place__image" alt="">
+      <button class="place__wastebasket-btn hover" type="button"></button>
+      <div class="place__info">
+        <h2 class="place__title"></h2>
+        <button class="place__like-btn hover" type="button"></button>
+      </div>
+    </li>
 
   </template>
 
