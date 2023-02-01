@@ -59,16 +59,30 @@ const popupInputMestoTitle = document.querySelector('.form__item_el_name'); //п
 const popupInputMestoUrlImage = document.querySelector('.form__item_el_description'); //поле адреса картинки
 
 // функция отображения карточек через forEach
-function renderCards() {
-  initialCards.forEach((item) => {
+
+// function renderCards(items) {
+//   items.forEach((item) => {
+//     const card = template.cloneNode(true);
+//     card.querySelector('.place__title').textContent = item.name;
+//     card.querySelector('.place__image').src = item.link;
+//     list.append(card);
+//   })
+// }
+
+
+// функция отображения карточек через map и rest
+
+function renderCards(items) {
+  const cards = items.map((item) => {
     const card = template.cloneNode(true);
     card.querySelector('.place__title').textContent = item.name;
     card.querySelector('.place__image').src = item.link;
-    list.append(card);
+    return card;
   })
+  list.append(...cards);
 }
 
-renderCards();
+renderCards(initialCards); //вызов функции отображения карточек
 
 
 
