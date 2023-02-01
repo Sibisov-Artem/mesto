@@ -1,25 +1,36 @@
-let popup = document.querySelector('.popup');
-let page = document.querySelector('.page');
-let content = page.querySelector('.content');
-let profile = content.querySelector('.profile');
-let editButton = profile.querySelector('.profile__edit-btn');
+const popup = document.querySelector('.popup');
+const popupProfile = document.querySelector('.popup_profile');
+const page = document.querySelector('.page');
+const content = page.querySelector('.content');
+const profile = content.querySelector('.profile');
+const editButton = profile.querySelector('.profile__edit-btn');  //кнопка редактирования профиля
 
-let profileName = profile.querySelector('.profile__name');
-let profileDescription = profile.querySelector('.profile__description');
-let popupProfileName = popup.querySelector('.form__item_el_name');
-let popupProfileDescription = popup.querySelector('.form__item_el_description');
+const mestoAddButton = profile.querySelector('.profile__add-btn'); // кнопка добавления места
 
-let popupCloseButton = popup.querySelector('.popup__close-btn');
+const likeButton = document.querySelectorAll('.place__like-btn'); //кнопка лайк
 
-let formElement = popup.querySelector('.form');
+const popupMesto = document.querySelector('.popup_mesto');
 
-function popupOpen() {
+const profileName = profile.querySelector('.profile__name');
+const profileDescription = profile.querySelector('.profile__description');
+const popupProfileName = popupProfile.querySelector('.form__item_el_name');
+const popupProfileDescription = popupProfile.querySelector('.form__item_el_description');
+
+const popupCloseButton = popup.querySelectorAll('.popup__close-btn');
+
+const formElement = popup.querySelector('.form');
+
+function openPopupEditProfile() {
   popupProfileName.value = profileName.textContent;
   popupProfileDescription.value = profileDescription.textContent;
-  popup.classList.add('popup_opened');
+  popupProfile.classList.add('popup_opened');
 }
 
-function popupClose() {
+function openPopupMesto() {
+  popupMesto.classList.add('popup_opened');
+}
+
+function closePopup() {
   popup.classList.remove('popup_opened');
 }
 
@@ -27,11 +38,30 @@ function saveProfile(evt) {
   evt.preventDefault();
   profileName.textContent = popupProfileName.value;
   profileDescription.textContent = popupProfileDescription.value;
-  popupClose();
+  closePopup();
 }
 
-editButton.addEventListener('click', popupOpen);
+editButton.addEventListener('click', openPopupEditProfile);
 
-popupCloseButton.addEventListener('click', popupClose);
+mestoAddButton.addEventListener('click', openPopupMesto);
+
+// popupCloseButton.addEventListener('click', closePopup);
 
 formElement.addEventListener('submit', saveProfile);
+
+likeButton.forEach(function (item) {
+  item.addEventListener('click', function (evt) {
+    evt.target.classList.toggle('place__like-btn_active');
+  });
+});
+
+
+
+
+
+// const popupCloseButton = popup.querySelectorAll('.popup__close-btn');
+popupCloseButton.forEach(function (item) {
+  item.addEventListener('click', function (evt) {
+    evt.target.classList.toggle('popup_opened');
+  });
+});

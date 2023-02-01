@@ -33,6 +33,7 @@
 
           <li class="place__card">
             <img class="place__image" src="./images/karachaevsk.jpg" alt="Каменное строение Карачаевска">
+            <button class="place__wastebasket-btn hover" type="button"></button>
             <div class="place__info">
               <h2 class="place__title">Карачаевск</h2>
               <button class="place__like-btn hover" type="button"></button>
@@ -41,6 +42,7 @@
 
           <li class="place__card">
             <img class="place__image" src="./images/elbrus.jpg" alt="Гора Эльбрус">
+            <button class="place__wastebasket-btn hover" type="button"></button>
             <div class="place__info">
               <h2 class="place__title">Гора Эльбрус</h2>
               <button class="place__like-btn hover" type="button"></button>
@@ -49,6 +51,7 @@
 
           <li class="place__card">
             <img class="place__image" src="./images/dumbai.jpg" alt="Гора Домбай">
+            <button class="place__wastebasket-btn hover" type="button"></button>
             <div class="place__info">
               <h2 class="place__title">Домбай</h2>
               <button class="place__like-btn hover" type="button"></button>
@@ -58,6 +61,7 @@
           <li class="place__card">
             <img class="place__image" src="./images/maldives.jpg"
               alt="Остров на Мальдивах с пальмами, и хижинами, к которому подплывает яхта по голубой бирюзовой воде">
+            <button class="place__wastebasket-btn hover" type="button"></button>
             <div class="place__info">
               <h2 class="place__title">Мальдивы</h2>
               <button class="place__like-btn hover" type="button"></button>
@@ -66,6 +70,7 @@
 
           <li class="place__card">
             <img class="place__image" src="./images/olhon.jpg" alt="Мыс Бурхан на Байкале">
+            <button class="place__wastebasket-btn hover" type="button"></button>
             <div class="place__info">
               <h2 class="place__title">Байкал</h2>
               <button class="place__like-btn hover" type="button"></button>
@@ -74,6 +79,7 @@
 
           <li class="place__card">
             <img class="place__image" src="./images/ruskeala.jpg" alt="Озеро среди гор парка Рускеала">
+            <button class="place__wastebasket-btn hover" type="button"></button>
             <div class="place__info">
               <h2 class="place__title">Парк Рускеала</h2>
               <button class="place__like-btn hover" type="button"></button>
@@ -90,7 +96,7 @@
 
   </div>
 
-  <div class="popup">
+  <div class="popup popup_profile">
     <div class="popup__container">
       <button class="popup__close-btn hover" type="button"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
@@ -103,6 +109,27 @@
       </form>
     </div>
   </div>
+
+  <div class="popup popup_mesto" style="display: ;">
+    <div class="popup__container">
+      <button class="popup__close-btn hover" type="button"></button>
+      <h2 class="popup__title">Новое место</h2>
+      <form class="form" name="form">
+        <fieldset class="form__input-container">
+          <input class="form__item form__item_el_mesto-title" type="text" name="mestoTitle" placeholder="Название">
+          <input class="form__item form__item_el_mesto-url" type="url" name="mestoUrlImage" placeholder="Ссылка на картинку">
+        </fieldset>
+        <button class="form__submit-btn" type="submit">Создать</button>
+      </form>
+    </div>
+  </div>
+
+  <template id="template">
+
+  </template>
+
+
+
 
   <script src="./scripts/index.js"></script>
 
