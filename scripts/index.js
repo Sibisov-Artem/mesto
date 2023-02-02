@@ -51,7 +51,7 @@ const initialCards = [
   }
 ];
 
-
+//-------------------------------------------------------------------------
 // смотрю видео и по ходу просмотра выполняю темплейт
 const template = document.querySelector('.card-template').content.querySelector('.place__card'); // тэмплейт и его контент-карточка
 const list = document.querySelector('.place__grid'); // список, внутрь которого будут вставать карточки
@@ -60,18 +60,24 @@ const formAddMesto = document.querySelector('.form__mesto'); //форма поп
 const popupInputMestoTitle = document.querySelector('.form__item_el_mesto-title'); //поле имени места
 const popupInputMestoUrlImage = document.querySelector('.form__item_el_mesto-url'); //поле адреса картинки
 
+
+/*------------------------------------------------------------------------
 // функция отображения карточек через forEach
 
-// function renderCards(items) {
-//   items.forEach((item) => {
-//     const card = template.cloneNode(true);
-//     card.querySelector('.place__title').textContent = item.name;
-//     card.querySelector('.place__image').src = item.link;
-//     list.append(card);
-//   })
-// }
+function renderCards() {
+  initialCards.forEach((item) => {
+    const card = template.cloneNode(true);
+    card.querySelector('.place__title').textContent = item.name;
+    card.querySelector('.place__image').src = item.link;
+    list.append(card);
+  })
+}
 
+renderCards(initialCards); //вызов функции отображения карточек
+*//*-----------------------------------------------------------------------*/
 
+/*-----------------------------------------------------------------------
+/* в этом комментарии то, что было до того как избавиться от повторяющегося кода добавления карточек через массив и формы добавления
 // функция отображения карточек через map и rest
 
 function renderCards(items) {
@@ -98,6 +104,40 @@ formAddMesto.addEventListener('submit', (evt) => {
 
   list.append(card);
 })
+*//*-----------------------------------------------------------------------*/
+
+//функция создания и удаления карточек
+function createAndRemoveCard(item) {
+  const card = template.cloneNode(true);
+  card.querySelector('.place__title').textContent = item.name;
+  card.querySelector('.place__image').src = item.link;
+  card.querySelector('.place__wastebasket-btn').addEventListener('click', () => { //удаление карточки по кнопке корзинки
+    card.remove();
+  });
+  return card;
+}
+
+// функция отображения карточек через map и rest
+function renderCards(items) {
+  const cards = items.map((item) => {
+    const card = template.cloneNode(true);
+    return createAndRemoveCard(item);
+  })
+  list.append(...cards);
+}
+
+renderCards(initialCards); //вызов функции отображения карточек
+
+//добавляю слушатель на форму добавления карточки через submit
+formAddMesto.addEventListener('submit', (evt) => {
+  evt.preventDefault(); // отменяем дефолтное поведение страницы (обновление) при нажатии на submit
+  const name = popupInputMestoTitle.value; // в переменную name ставим значение, которое будет введено в поле имени места
+  const link = popupInputMestoUrlImage.value; // в переменную link ставим значение, которое будет введено в поле ссылки на картинку
+
+  const card = createAndRemoveCard({ name: name, link: link })
+
+  list.append(card);
+})
 
 
 
@@ -105,8 +145,7 @@ formAddMesto.addEventListener('submit', (evt) => {
 
 
 
-
-
+// --------------------------------------------------------------
 
 
 // функция открытия попап профиля
