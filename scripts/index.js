@@ -106,7 +106,11 @@ formAddMesto.addEventListener('submit', (evt) => {
 })
 *//*-----------------------------------------------------------------------*/
 
-//функция создания и удаления карточек
+/*
+//функция создания и удаления карточек -------------------------------------------------------------------------
+//способ функции двойного выполнения, буду переделывать на разделение функций на отдельные действия
+//то есть удаление отдельно, создание отдельно
+
 function createAndRemoveCard(item) {
   const card = template.cloneNode(true);
   card.querySelector('.place__title').textContent = item.name;
@@ -137,7 +141,62 @@ formAddMesto.addEventListener('submit', (evt) => {
   const card = createAndRemoveCard({ name: name, link: link })
 
   list.append(card);
+}) */
+//------------------------------------------------------------------------------------------------------------------
+
+
+//функция удаления по клику по корзинке через target и closest для createCard
+function deleteClick(event) {
+  event.target.closest('.place__card').remove();
+}
+
+// функция переключателя лайков на карточки
+function likeClick(event) {
+  event.target.classList.toggle('place__like-btn_active');
+}
+
+// функция создания карточки
+function createCard(item) {
+  const card = template.cloneNode(true);
+  card.querySelector('.place__title').textContent = item.name; // название картинки (title)
+  card.querySelector('.place__image').src = item.link; //ссылка на картинку
+  card.querySelector('.place__image').alt = item.name; //alt описание к картинке
+  card.querySelector('.place__wastebasket-btn').addEventListener('click', deleteClick); //удаление картинки по клику на корзинку
+  card.querySelector('.place__like-btn').addEventListener('click', likeClick); //переключатель лайков
+  return card;
+}
+
+// функция отображения карточек через map и rest из массива
+function renderCards(items) {
+  const cards = items.map((item) => {
+    const card = template.cloneNode(true);
+    return createCard(item);
+  })
+  list.append(...cards);
+}
+
+renderCards(initialCards); //вызов функции отображения карточек из массива
+
+
+
+//добавляю слушатель на форму добавления карточки через submit
+formAddMesto.addEventListener('submit', (evt) => {
+  evt.preventDefault(); // отменяем дефолтное поведение страницы (обновление) при нажатии на submit
+  const name = popupInputMestoTitle.value; // в переменную name ставим значение, которое будет введено в поле имени места
+  const link = popupInputMestoUrlImage.value; // в переменную link ставим значение, которое будет введено в поле ссылки на картинку
+
+  const card = createCard({ name: name, link: link })
+  closePopupMesto(); // закрытие попапа
+  list.append(card);
 })
+
+
+
+
+
+
+
+
 
 
 
@@ -189,6 +248,8 @@ mestoAddButton.addEventListener('click', openPopupMesto); //слушатель �
 
 popupMestoCloseButton.addEventListener('click', closePopupMesto); //слушатель закрытия попап профиля по кнопке закрытия
 
+/*----------------------------------------------------------------------------------------
+Это было до подключения динамического подключения, создания картинок
 
 // переключатель лайков на карточки
 likeButton.forEach(function (item) {
@@ -196,3 +257,4 @@ likeButton.forEach(function (item) {
     evt.target.classList.toggle('place__like-btn_active');
   });
 });
+-----------------------------------------------------------------------------------------------------------------*/
