@@ -51,12 +51,14 @@ const initialCards = [
   }
 ];
 
+
+// смотрю видео и по ходу просмотра выполняю темплейт
 const template = document.querySelector('.card-template').content.querySelector('.place__card'); // тэмплейт и его контент-карточка
 const list = document.querySelector('.place__grid'); // список, внутрь которого будут вставать карточки
 
-const formAddMesto = document.querySelector('.form__item_el_mesto-title'); //форма попап добавления места
-const popupInputMestoTitle = document.querySelector('.form__item_el_name'); //поле имени места
-const popupInputMestoUrlImage = document.querySelector('.form__item_el_description'); //поле адреса картинки
+const formAddMesto = document.querySelector('.form__mesto'); //форма попап добавления места
+const popupInputMestoTitle = document.querySelector('.form__item_el_mesto-title'); //поле имени места
+const popupInputMestoUrlImage = document.querySelector('.form__item_el_mesto-url'); //поле адреса картинки
 
 // функция отображения карточек через forEach
 
@@ -83,6 +85,25 @@ function renderCards(items) {
 }
 
 renderCards(initialCards); //вызов функции отображения карточек
+
+//добавляю слушатель на форму добавления карточки через submit
+formAddMesto.addEventListener('submit', (evt) => {
+  evt.preventDefault(); // отменяем дефолтное поведение страницы (обновление) при нажатии на submit
+  const name = popupInputMestoTitle.value; // в переменную name ставим значение, которое будет введено в поле имени места
+  const link = popupInputMestoUrlImage.value; // в переменную link ставим значение, которое будет введено в поле ссылки на картинку
+
+  const card = template.cloneNode(true);
+  card.querySelector('.place__title').textContent = name;
+  card.querySelector('.place__image').src = link;
+
+  list.append(card);
+})
+
+
+
+
+
+
 
 
 
