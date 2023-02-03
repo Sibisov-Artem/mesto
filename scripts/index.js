@@ -9,17 +9,17 @@ const profileName = profile.querySelector('.profile__name'); //имя профи
 const profileDescription = profile.querySelector('.profile__description'); //описание профиля
 const editButton = profile.querySelector('.profile__edit-btn');  //кнопка открытия попап профиля
 
-const formElementProfile = popupProfile.querySelector('.form__profile'); //форма попап профиля
+const formElementProfile = popupProfile.querySelector('.popup__form_profile'); //форма попап профиля
 const popupInputProfileName = popupProfile.querySelector('.form__item_el_name'); //поле имени профиля
 const popupInputProfileDescription = popupProfile.querySelector('.form__item_el_description'); //поле описания профиля
 
-const popupProfileCloseButton = document.querySelector('.popup_profile__close-btn'); //кнопка закрытия попап профиля
+const popupProfileCloseButton = document.querySelector('.popup__close-btn_profile'); //кнопка закрытия попап профиля
 
 const popupMesto = document.querySelector('.popup_mesto'); //попап добавления места
 
 const mestoAddButton = profile.querySelector('.profile__add-btn'); //кнопка открытия попап добавления места
 
-const popupMestoCloseButton = document.querySelector('.popup_mesto__close-btn'); //кнопка закрытия попап добавления места
+const popupMestoCloseButton = document.querySelector('.popup__close-btn_mesto'); //кнопка закрытия попап добавления места
 
 const likeButton = document.querySelectorAll('.place__like-btn'); //кнопка лайк
 
@@ -187,7 +187,7 @@ formAddMesto.addEventListener('submit', (evt) => {
 
   const card = createCard({ name: name, link: link })
   closePopupMesto(); // закрытие попапа
-  list.append(card);
+  list.prepend(card);
 })
 
 
