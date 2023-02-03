@@ -10,8 +10,8 @@ const profileDescription = profile.querySelector('.profile__description'); //о�
 const editButton = profile.querySelector('.profile__edit-btn');  //кнопка открытия попап профиля
 
 const formElementProfile = popupProfile.querySelector('.popup__form_profile'); //форма попап профиля
-const popupInputProfileName = popupProfile.querySelector('.form__item_el_name'); //поле имени профиля
-const popupInputProfileDescription = popupProfile.querySelector('.form__item_el_description'); //поле описания профиля
+const popupInputProfileName = popupProfile.querySelector('.popup__form-item_el_name'); //поле имени профиля
+const popupInputProfileDescription = popupProfile.querySelector('.popup__form-item_el_description'); //поле описания профиля
 
 const popupProfileCloseButton = document.querySelector('.popup__close-btn_profile'); //кнопка закрытия попап профиля
 
@@ -56,9 +56,9 @@ const initialCards = [
 const template = document.querySelector('.card-template').content.querySelector('.place__card'); // тэмплейт и его контент-карточка
 const list = document.querySelector('.place__grid'); // список, внутрь которого будут вставать карточки
 
-const formAddMesto = document.querySelector('.form__mesto'); //форма попап добавления места
-const popupInputMestoTitle = document.querySelector('.form__item_el_mesto-title'); //поле имени места
-const popupInputMestoUrlImage = document.querySelector('.form__item_el_mesto-url'); //поле адреса картинки
+const formAddMesto = document.querySelector('.popup__form_mesto'); //форма попап добавления места
+const popupInputMestoTitle = document.querySelector('.popup__form-item_el_mesto-title'); //поле имени места
+const popupInputMestoUrlImage = document.querySelector('.popup__form-item_el_mesto-url'); //поле адреса картинки
 
 
 /*------------------------------------------------------------------------

@@ -46,11 +46,11 @@
       <button class="popup__close-btn popup__close-btn_profile hover" type="button"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
       <form class="popup__form popup__form_profile" name="formProfile">
-        <fieldset class="popup__form_input-container">
-          <input class="form__item form__item_el_name" type="text" name="profileName">
-          <input class="form__item form__item_el_description" type="text" name="profileDescription">
+        <fieldset class="popup__input-container">
+          <input class="popup__form-item popup__form-item_el_name" type="text" name="profileName">
+          <input class="popup__form-item popup__form-item_el_description" type="text" name="profileDescription">
         </fieldset>
-        <button class="form__submit-btn" type="submit">Сохранить</button>
+        <button class="popup__submit-btn" type="submit">Сохранить</button>
       </form>
     </div>
   </div>
@@ -59,23 +59,24 @@
     <div class="popup__container">
       <button class="popup__close-btn popup__close-btn_mesto hover" type="button"></button>
       <h2 class="popup__title">Новое место</h2>
-      <form class="popup__form form__mesto" name="form">
-        <fieldset class="popup__form_input-container">
-          <input class="form__item form__item_el_mesto-title" type="text" name="mestoTitle" placeholder="Название">
-          <input class="form__item form__item_el_mesto-url" type="url" name="mestoUrlImage"
+      <form class="popup__form popup__form_mesto" name="form">
+        <fieldset class="popup__input-container">
+          <input class="popup__form-item popup__form-item_el_mesto-title" type="text" name="mestoTitle"
+            placeholder="Название">
+          <input class="popup__form-item popup__form-item_el_mesto-url" type="url" name="mestoUrlImage"
             placeholder="Ссылка на картинку">
         </fieldset>
-        <button class="form__submit-btn" type="submit">Создать</button>
+        <button class="popup__submit-btn" type="submit">Создать</button>
       </form>
     </div>
   </div>
 
-  <div class="popup popup_view-image">
+  <div class="popup popup_view">
 
-    <figure class="popup__container-view-image">
-      <button class="popup__close-btn popup__close-btn_view-image hover" type="button"></button>
-      <img class="place__image_view-image"  alt="">
-      <figcaption class="popup__container__caption">ваша полка — верхняя</figcaption>
+    <figure class="popup__container-view">
+      <button class="popup__close-btn popup__close-btn_view hover" type="button"></button>
+      <img class="popup__image" alt="">
+      <figcaption class="popup__image-caption">ваша полка — верхняя</figcaption>
     </figure>
 
   </div>
