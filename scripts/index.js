@@ -258,3 +258,19 @@ likeButton.forEach(function (item) {
   });
 });
 -----------------------------------------------------------------------------------------------------------------*/
+
+//работаю над попап просмотра картинки
+//сперва нужно натсроить css свойства для попап
+//далее идет работа JS:
+const popupView = document.querySelector('.popup_view'); //попап просмотра картинки
+const popupViewCloseButton = document.querySelector('.popup__close-btn_view'); //кнопка закрытия просмотра картинки
+const image = document.querySelector('.place__image');
+const imageVeiw = document.querySelector('.gallery__img'); // картинка попап просмотра картинки
+const ImageCaption = document.querySelector('.popup__image-caption'); // описание к картинке
+
+// функция открытия попап добавления места
+function openPopupView() {
+  popupView.classList.add('popup_opened');
+}
+
+image.addEventListener('click', openPopupView); //слушатель открытия попап добавления места по кнопке добавления места
