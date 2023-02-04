@@ -264,11 +264,23 @@ likeButton.forEach(function (item) {
 //далее идет работа JS:
 const popupView = document.querySelector('.popup_view'); //попап просмотра картинки
 const popupViewCloseButton = document.querySelector('.popup__close-btn_view'); //кнопка закрытия просмотра картинки
-const image = document.querySelector('.place__image');
+const images = document.querySelectorAll('.place__image');
 const imageVeiw = document.querySelector('.gallery__img'); // картинка попап просмотра картинки
 const popupImage = document.querySelector('.popup__image');
 const ImageCaption = document.querySelector('.popup__image-caption'); // описание к картинке
 
+// функция открытия попап просмотра картинки
+images.forEach((item) => {
+  item.addEventListener('click', (evt) => {
+    popupImage.alt = evt.target.alt;
+    popupImage.src = evt.target.src;
+    ImageCaption.textContent = evt.target.alt;
+    popupView.classList.add('popup_opened');
+  });
+});
+
+
+/*
 // функция открытия попап просмотра картинки
 function openPopupView() {
   popupImage.alt = image.alt;
@@ -277,6 +289,10 @@ function openPopupView() {
 
   popupView.classList.add('popup_opened');
 }
+*/
+
+
+
 
 /*
 
@@ -293,8 +309,7 @@ function openPopupProfile() {
 
 // функция закрытия попап просмотра картинки
 function closePopupView() {
-  popupView.classList.remove('popup_opened');
-}
+    popupView.classList.remove('popup_opened');
+  }
 
-image.addEventListener('click', openPopupView); //слушатель открытия попап просмотра картинки по клику на кратинку
 popupViewCloseButton.addEventListener('click', closePopupView); //слушатель закрытия попап просмотра картинки по кнопке закрытия
