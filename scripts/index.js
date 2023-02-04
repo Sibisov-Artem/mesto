@@ -269,7 +269,7 @@ const imageVeiw = document.querySelector('.gallery__img'); // картинка �
 const popupImage = document.querySelector('.popup__image');
 const ImageCaption = document.querySelector('.popup__image-caption'); // описание к картинке
 
-// функция открытия попап просмотра картинки
+//  открытие попап просмотра картинки
 images.forEach((item) => {
   item.addEventListener('click', (evt) => {
     popupImage.alt = evt.target.alt;
