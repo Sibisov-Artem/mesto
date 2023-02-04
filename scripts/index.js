@@ -186,7 +186,7 @@ formAddMesto.addEventListener('submit', (evt) => {
   const link = popupInputMestoUrlImage.value; // в переменную link ставим значение, которое будет введено в поле ссылки на картинку
 
   const card = createCard({ name: name, link: link })
-  closePopupMesto(); // закрытие попапа
+  closePopupMesto(); // закрытие попап место
   list.prepend(card);
 })
 
@@ -266,18 +266,35 @@ const popupView = document.querySelector('.popup_view'); //попап просм
 const popupViewCloseButton = document.querySelector('.popup__close-btn_view'); //кнопка закрытия просмотра картинки
 const image = document.querySelector('.place__image');
 const imageVeiw = document.querySelector('.gallery__img'); // картинка попап просмотра картинки
+const popupImage = document.querySelector('.popup__image');
 const ImageCaption = document.querySelector('.popup__image-caption'); // описание к картинке
 
-// функция открытия попап добавления места
+// функция открытия попап просмотра картинки
 function openPopupView() {
+  popupImage.alt = image.alt;
+  popupImage.src = image.src;
+  ImageCaption.textContent = image.alt;
+
   popupView.classList.add('popup_opened');
 }
 
+/*
 
-// функция закрытия попап добавления места
+// функция открытия попап профиля
+function openPopupProfile() {
+  popupInputProfileName.value = profileName.textContent;
+  popupInputProfileDescription.value = profileDescription.textContent;
+  popupProfile.classList.add('popup_opened');
+}
+
+*/
+
+
+
+// функция закрытия попап просмотра картинки
 function closePopupView() {
   popupView.classList.remove('popup_opened');
 }
 
-image.addEventListener('click', openPopupView); //слушатель открытия попап добавления места по кнопке добавления места
-popupViewCloseButton.addEventListener('click', closePopupView); //слушатель закрытия попап добавления места по кнопке закрытия
+image.addEventListener('click', openPopupView); //слушатель открытия попап просмотра картинки по клику на кратинку
+popupViewCloseButton.addEventListener('click', closePopupView); //слушатель закрытия попап просмотра картинки по кнопке закрытия
