@@ -273,4 +273,11 @@ function openPopupView() {
   popupView.classList.add('popup_opened');
 }
 
+
+// функция закрытия попап добавления места
+function closePopupView() {
+  popupView.classList.remove('popup_opened');
+}
+
 image.addEventListener('click', openPopupView); //слушатель открытия попап добавления места по кнопке добавления места
+popupViewCloseButton.addEventListener('click', closePopupView); //слушатель закрытия попап добавления места по кнопке закрытия
