@@ -38,32 +38,42 @@ function deleteClick(event) {
   event.target.closest('.place__card').remove();
 }
 
-// функция переключателя лайков на карточки
+// функция переключателя лайков на карточки для createCard
 function likeClick(event) {
   event.target.classList.toggle('place__like-btn_active');
 }
 
-// функция создания карточки
-function createCard(item) {
+// функция создания и просмотра карточки
+function createCard(name, link) {
   const card = template.cloneNode(true);
-  card.querySelector('.place__title').textContent = item.name; // название картинки (title)
-  card.querySelector('.place__image').src = item.link; //ссылка на картинку
-  card.querySelector('.place__image').alt = item.name; //alt описание к картинке
+  card.querySelector('.place__title').textContent = name; // название картинки (title)
+  card.querySelector('.place__image').src = link; //ссылка на картинку
+  card.querySelector('.place__image').alt = name; //alt описание к картинке
   card.querySelector('.place__wastebasket-btn').addEventListener('click', deleteClick); //удаление картинки по клику на корзинку
   card.querySelector('.place__like-btn').addEventListener('click', likeClick); //переключатель лайков
+  card.querySelector('.place__image').addEventListener('click', () => openPopupView(name, link));
+
   return card;
 }
 
-// функция отображения карточек через map и rest из массива
-function renderCards(items) {
-  const cards = items.map((item) => {
-    const card = template.cloneNode(true);
-    return createCard(item);
-  })
-  list.append(...cards);
+//  функция открытия попап просмотра картинки
+function openPopupView(name, link) {
+  image.src = link;
+  image.alt = name;
+  imageCaption.textContent = name;
+  openPopup(popupView);
 }
 
-renderCards(initialCards); //вызов функции отображения карточек из массива
+// функция отображения карточек
+function renderCards(name, link) {
+  const card = createCard(name, link);
+  list.append(card);
+}
+
+//вызов функции отображения карточек из массива
+initialCards.forEach((item) => {
+  renderCards(item.name, item.link);
+})
 
 //добавляю слушатель на форму добавления карточки через submit
 formAddMesto.addEventListener('submit', (evt) => {
@@ -71,7 +81,7 @@ formAddMesto.addEventListener('submit', (evt) => {
   const name = popupInputMestoTitle.value; // в переменную name ставим значение, которое будет введено в поле имени места
   const link = popupInputMestoUrlImage.value; // в переменную link ставим значение, которое будет введено в поле ссылки на картинку
 
-  const card = createCard({ name: name, link: link })
+  const card = createCard(name, link)
   closePopup(popupMesto); // закрытие попап место
   list.prepend(card);
 })
@@ -102,15 +112,6 @@ function saveProfile(evt) {
   closePopup(popupProfile);
 }
 
-//  открытие попап просмотра картинки
-document.querySelectorAll('.place__image').forEach((item) => {
-  item.addEventListener('click', (evt) => {
-    image.alt = evt.target.alt;
-    image.src = evt.target.src;
-    imageCaption.textContent = evt.target.alt;
-    popupView.classList.add('popup_opened');
-  });
-});
 
 // ------------------------------------------------слушатели---------------------------------------------------------
 
