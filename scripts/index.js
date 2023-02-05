@@ -28,7 +28,7 @@ const popupInputMestoUrlImage = document.querySelector('.popup__form-item_el_mes
 //---------------------------попап просмотра картинок------------------------------------------------------------------
 const popupView = document.querySelector('.popup_view'); //попап просмотра картинки
 const popupViewCloseButton = document.querySelector('.popup__close-btn_view'); //кнопка закрытия просмотра картинки
-const popupImage = document.querySelector('.popup__image'); // картинка просмотра
+const image = document.querySelector('.popup__image'); // картинка просмотра
 const imageCaption = document.querySelector('.popup__image-caption'); // описание к картинке
 
 // ----------------------------------функции-------------------------------------------------------
@@ -72,21 +72,26 @@ formAddMesto.addEventListener('submit', (evt) => {
   const link = popupInputMestoUrlImage.value; // в переменную link ставим значение, которое будет введено в поле ссылки на картинку
 
   const card = createCard({ name: name, link: link })
-  closePopupMesto(); // закрытие попап место
+  closePopup(popupMesto); // закрытие попап место
   list.prepend(card);
 })
 
+// общая функция открытия попап
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+}
 
 // функция открытия попап профиля
 function openPopupProfile() {
   popupInputProfileName.value = profileName.textContent;
   popupInputProfileDescription.value = profileDescription.textContent;
-  popupProfile.classList.add('popup_opened');
+  openPopup(popupProfile);
 }
 
-// функция закрытия попап профиля
-function closePopupProfile() {
-  popupProfile.classList.remove('popup_opened');
+
+// общая функция закрытия попап
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
 }
 
 // функция сохранения профиля
@@ -94,29 +99,14 @@ function saveProfile(evt) {
   evt.preventDefault();
   profileName.textContent = popupInputProfileName.value;
   profileDescription.textContent = popupInputProfileDescription.value;
-  closePopupProfile();
-}
-
-// функция открытия попап добавления места
-function openPopupMesto() {
-  popupMesto.classList.add('popup_opened');
-}
-
-// функция закрытия попап добавления места
-function closePopupMesto() {
-  popupMesto.classList.remove('popup_opened');
-}
-
-// функция закрытия попап просмотра картинки
-function closePopupView() {
-  popupView.classList.remove('popup_opened');
+  closePopup(popupProfile);
 }
 
 //  открытие попап просмотра картинки
 document.querySelectorAll('.place__image').forEach((item) => {
   item.addEventListener('click', (evt) => {
-    popupImage.alt = evt.target.alt;
-    popupImage.src = evt.target.src;
+    image.alt = evt.target.alt;
+    image.src = evt.target.src;
     imageCaption.textContent = evt.target.alt;
     popupView.classList.add('popup_opened');
   });
@@ -126,12 +116,12 @@ document.querySelectorAll('.place__image').forEach((item) => {
 
 editButton.addEventListener('click', openPopupProfile); //слушатель открытия попап профиля по кнопке редактирования профиля
 
-popupProfileCloseButton.addEventListener('click', closePopupProfile); //слушатель закрытия попап профиля по кнопке закрытия
+popupProfileCloseButton.addEventListener('click', () => { closePopup(popupProfile) }); //слушатель закрытия попап профиля по кнопке закрытия
 
 formElementProfile.addEventListener('submit', saveProfile); //слушатель сохранения профиля
 
-mestoAddButton.addEventListener('click', openPopupMesto); //слушатель открытия попап добавления места по кнопке добавления места
+mestoAddButton.addEventListener('click', () => { openPopup(popupMesto) }); //слушатель открытия попап добавления места по кнопке добавления места
 
-popupMestoCloseButton.addEventListener('click', closePopupMesto); //слушатель закрытия попап профиля по кнопке закрытия
+popupMestoCloseButton.addEventListener('click', () => { closePopup(popupMesto) }); //слушатель закрытия попап места по кнопке закрытия
 
-popupViewCloseButton.addEventListener('click', closePopupView); //слушатель закрытия попап просмотра картинки по кнопке закрытия
+popupViewCloseButton.addEventListener('click', () => { closePopup(popupView) }); //слушатель закрытия попап просмотра картинки по кнопке закрытия
