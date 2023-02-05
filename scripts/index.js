@@ -29,35 +29,7 @@ const popupInputMestoUrlImage = document.querySelector('.popup__form-item_el_mes
 const popupView = document.querySelector('.popup_view'); //попап просмотра картинки
 const popupViewCloseButton = document.querySelector('.popup__close-btn_view'); //кнопка закрытия просмотра картинки
 const popupImage = document.querySelector('.popup__image'); // картинка просмотра
-const ImageCaption = document.querySelector('.popup__image-caption'); // описание к картинке
-
-// набор начальных карточек
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+const imageCaption = document.querySelector('.popup__image-caption'); // описание к картинке
 
 // ----------------------------------функции-------------------------------------------------------
 
@@ -145,7 +117,7 @@ document.querySelectorAll('.place__image').forEach((item) => {
   item.addEventListener('click', (evt) => {
     popupImage.alt = evt.target.alt;
     popupImage.src = evt.target.src;
-    ImageCaption.textContent = evt.target.alt;
+    imageCaption.textContent = evt.target.alt;
     popupView.classList.add('popup_opened');
   });
 });
