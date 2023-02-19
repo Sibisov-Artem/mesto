@@ -1,0 +1,14 @@
+.popup__submit-btn_disabled {
+  border: 1px solid #000;
+  opacity: .2;
+  width: 100%;
+  height: 50px;
+  font-weight: 400;
+  background-color: #FFF;
+  color: #000;
+  font-size: 18px;
+  line-height: 22px;
+  margin-top: 31px;
+  border-radius: 2px;
+  padding: 0;
+}
