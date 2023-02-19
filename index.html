@@ -48,7 +48,9 @@
       <form class="popup__form popup__form_profile" name="formProfile">
         <fieldset class="popup__input-container">
           <input class="popup__input popup__input_el_name" type="text" name="profileName" placeholder="Имя" required minlength = 2 maxlength = 40 >
+          <span class="form__input-error"></span>
           <input class="popup__input popup__input_el_description" type="text" name="profileDescription" placeholder="Профессия" required minlength = 2 maxlength = 200>
+          <span class="form__input-error"></span>
         </fieldset>
         <button class="popup__submit-btn" type="submit">Сохранить</button>
       </form>
@@ -63,8 +65,10 @@
         <fieldset class="popup__input-container">
           <input class="popup__input popup__input_el_mesto-title" type="text" name="mestoTitle"
             placeholder="Название" required>
+            <span class="form__input-error"></span>
           <input class="popup__input popup__input_el_mesto-url" type="url" name="mestoUrlImage"
             placeholder="Ссылка на картинку" required>
+            <span class="form__input-error"></span>
         </fieldset>
         <button class="popup__submit-btn" type="submit">Создать</button>
       </form>
