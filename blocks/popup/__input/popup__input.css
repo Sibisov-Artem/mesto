@@ -1,4 +1,4 @@
-.popup__form-item {
+.popup__input {
   font-size: 14px;
   line-height: 17px;
   font-weight: 400;
@@ -10,6 +10,6 @@
   outline: none;
 }
 
-.popup__form-item:not(:last-child) {
+.popup__input:not(:last-child) {
   margin-bottom: 19px;
 }
