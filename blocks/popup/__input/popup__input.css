@@ -9,7 +9,3 @@
   padding: 0;
   outline: none;
 }
-
-.popup__input:not(:last-child) {
-  margin-bottom: 19px;
-}
