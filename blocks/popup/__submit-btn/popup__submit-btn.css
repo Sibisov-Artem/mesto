@@ -18,6 +18,11 @@
   cursor: pointer;
 }
 
+.popup__submit-btn:disabled {
+  opacity: 0.2;
+  cursor:default;
+}
+
 @media screen and (max-width:611px) {
   .popup__submit-btn {
     height: 46px;
