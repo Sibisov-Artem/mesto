@@ -1,7 +1,7 @@
 const page = document.querySelector('.page');
 const content = page.querySelector('.content');
 const profile = content.querySelector('.profile');
-const popupAll = document.querySelectorAll('.popup') // для закрытия по оверлею использую
+const popupAll = document.querySelectorAll('.popup') // использую для закрытия по оверлею
 
 //---------------------------попап профиль------------------------------------------------------------------
 const popupProfile = document.querySelector('.popup_profile'); //попап профиля
