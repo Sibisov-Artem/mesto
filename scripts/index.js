@@ -89,7 +89,7 @@ formAddMesto.addEventListener('submit', (evt) => {
 // общая функция открытия попап
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-
+  document.addEventListener('keydown', closePopupEsc) // вешаю слушатель при открытом окне на закрытие по Escape
 }
 
 // функция открытия попап профиля
@@ -111,6 +111,7 @@ function closePopupEsc (evt) {
 // общая функция закрытия попап
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupEsc) //чтобы перестал срабатывать когда окна закрыты
 }
 
 // функция сохранения профиля
@@ -136,4 +137,3 @@ popupMestoCloseButton.addEventListener('click', () => { closePopup(popupMesto) }
 
 popupViewCloseButton.addEventListener('click', () => { closePopup(popupView) }); //слушатель закрытия попап просмотра картинки по кнопке закрытия
 
-document.addEventListener('keydown', closePopupEsc)
