@@ -1,6 +1,7 @@
 const page = document.querySelector('.page');
 const content = page.querySelector('.content');
 const profile = content.querySelector('.profile');
+const popupAll = document.querySelectorAll('.popup') // для закрытия по оверлею использую
 
 //---------------------------попап профиль------------------------------------------------------------------
 const popupProfile = document.querySelector('.popup_profile'); //попап профиля
@@ -100,14 +101,26 @@ function openPopupProfile() {
 }
 //--------------------------------------
 // функция для закрытия попап по нажатию на Escape
-function closePopupEsc (evt) {
-  if(evt.key === "Escape") {
+function closePopupEsc(evt) {
+  if (evt.key === "Escape") {
     const popupOpened = document.querySelector('.popup_opened');
     closePopup(popupOpened);
   }
 }
 //------------------------------------
 
+// Закрытие попапа кликом на оверлей
+popupAll.forEach((popup) => {
+
+  popup.addEventListener('click', (evt) => {
+    console.log(evt.target);
+    console.log(evt.currentTarget);
+    if (evt.target === evt.currentTarget) {
+      closePopup(popup)
+    }
+  });
+})
+//------------------------------------
 // общая функция закрытия попап
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
