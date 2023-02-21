@@ -89,6 +89,7 @@ formAddMesto.addEventListener('submit', (evt) => {
 // общая функция открытия попап
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+
 }
 
 // функция открытия попап профиля
@@ -97,7 +98,15 @@ function openPopupProfile() {
   popupInputProfileDescription.value = profileDescription.textContent;
   openPopup(popupProfile);
 }
-
+//--------------------------------------
+// функция для закрытия попап по нажатию на Escape
+function closePopupEsc (evt) {
+  if(evt.key === "Escape") {
+    const popupOpened = document.querySelector('.popup_opened');
+    closePopup(popupOpened);
+  }
+}
+//------------------------------------
 
 // общая функция закрытия попап
 function closePopup(popup) {
@@ -126,3 +135,5 @@ mestoAddButton.addEventListener('click', () => { openPopup(popupMesto) }); //с�
 popupMestoCloseButton.addEventListener('click', () => { closePopup(popupMesto) }); //слушатель закрытия попап места по кнопке закрытия
 
 popupViewCloseButton.addEventListener('click', () => { closePopup(popupView) }); //слушатель закрытия попап просмотра картинки по кнопке закрытия
+
+document.addEventListener('keydown', closePopupEsc)
