@@ -108,7 +108,6 @@ function closePopupEsc(evt) {
   }
 }
 //------------------------------------
-
 // Закрытие попапа кликом на оверлей
 popupAll.forEach((popup) => {
 
@@ -134,7 +133,6 @@ function saveProfile(evt) {
   profileDescription.textContent = popupInputProfileDescription.value;
   closePopup(popupProfile);
 }
-
 
 // ------------------------------------------------слушатели---------------------------------------------------------
 
