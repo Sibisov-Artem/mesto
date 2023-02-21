@@ -34,22 +34,6 @@ const checkInputValidity = (formSelector, inputSelector) => {
   }
 };
 
-//слушатель форм и их полей
-const setEventListeners = (formSelector) => {
-  const inputList = Array.from(formSelector.querySelectorAll(formsConfig.inputSelector)); //список, массив инпутов форм
-  const buttonElement = formSelector.querySelector(formsConfig.submitButtonSelector);
-
-  toggleButtonState(inputList, buttonElement);
-
-  inputList.forEach((inputSelector) => {
-      inputSelector.addEventListener('input', function () {
-          checkInputValidity(formSelector, inputSelector);
-
-          toggleButtonState(inputList, buttonElement);
-      });
-  });
-};
-
 // функция проверки инпутов на валидность
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputSelector) => {
@@ -67,6 +51,37 @@ const toggleButtonState = (inputList, buttonElement) => {
       buttonElement.removeAttribute('disabled', 'true');
   }
 }
+
+//-----------------------------------------------------
+
+/*
+Если закрыть модальное окно в невалидном состоянии, а затем открыть его, то будут видны
+ блоки ошибок с прошлого раза http://joxi.ru/5mdwDb1c1JvBer, это выглядит странно.
+ Предлагаю добавить в validate функцию которая примет DOM-элемент формы, найдет коллекцию полей ввода формы,
+  пройдет в цикле и для каждого поля вызовет функцию удаления ошибки
+http://joxi.ru/xAeP49yT6VYyP2
+Если пользователь удалит все карточки, блок footer отрывается от нижнего края страницы и прижимается
+к информации о пользователе. Лучше добавить для общего контейнера с карточками или всему блоку <main>
+минимальную высоту в относительных единицах (проценты или vh).
+*/
+
+//-----------------------------------------------------
+
+//слушатель форм и их полей
+const setEventListeners = (formSelector) => {
+  const inputList = Array.from(formSelector.querySelectorAll(formsConfig.inputSelector)); //список, массив инпутов форм
+  const buttonElement = formSelector.querySelector(formsConfig.submitButtonSelector);
+
+  toggleButtonState(inputList, buttonElement);
+
+  inputList.forEach((inputSelector) => {
+      inputSelector.addEventListener('input', function () {
+          checkInputValidity(formSelector, inputSelector);
+
+          toggleButtonState(inputList, buttonElement);
+      });
+  });
+};
 
 //функция валидации форм
 const enableValidation = () => {

@@ -112,7 +112,7 @@ function closePopupEsc(evt) {
 // Закрытие попапа кликом на оверлей
 popupAll.forEach((popup) => {
 
-  popup.addEventListener('click', (evt) => {
+  popup.addEventListener('mousedown', (evt) => { //заменил click на mousedown
     console.log(evt.target);
     console.log(evt.currentTarget);
     if (evt.target === evt.currentTarget) {
