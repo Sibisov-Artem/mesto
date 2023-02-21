@@ -96,3 +96,15 @@ const enableValidation = () => {
 
 
 enableValidation();
+
+const removeError = () => {
+  const inputList = Array.from(document.querySelectorAll(formsConfig.inputSelector));
+  inputList.forEach((inputSelector) => {
+    if (inputSelector.validity.valid) {
+      hideInputError(formSelector, inputSelector);
+    }
+  })
+}
+
+removeError();
+
