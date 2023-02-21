@@ -143,7 +143,11 @@ popupProfileCloseButton.addEventListener('click', () => { closePopup(popupProfil
 
 formElementProfile.addEventListener('submit', saveProfile); //слушатель сохранения профиля
 
-mestoAddButton.addEventListener('click', () => { openPopup(popupMesto) }); //слушатель открытия попап добавления места по кнопке добавления места
+mestoAddButton.addEventListener('click', () => {
+  openPopup(popupMesto);
+  popupInputMestoTitle.value = ''; //чтобы очищалось поле при открывании
+  popupInputMestoUrlImage.value = ''; //чтобы очищалось поле при открывании
+}); //слушатель открытия попап добавления места по кнопке добавления места
 
 popupMestoCloseButton.addEventListener('click', () => { closePopup(popupMesto) }); //слушатель закрытия попап места по кнопке закрытия
 
