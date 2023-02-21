@@ -47,12 +47,13 @@ function likeClick(event) {
 // функция создания и просмотра карточки
 function createCard(name, link) {
   const card = template.cloneNode(true);
+  const imageCard = card.querySelector('.place__image');
   card.querySelector('.place__title').textContent = name; // название картинки (title)
-  card.querySelector('.place__image').src = link; //ссылка на картинку
-  card.querySelector('.place__image').alt = name; //alt описание к картинке
+  imageCard.src = link; //ссылка на картинку
+  imageCard.alt = name; //alt описание к картинке
   card.querySelector('.place__wastebasket-btn').addEventListener('click', deleteClick); //удаление картинки по клику на корзинку
   card.querySelector('.place__like-btn').addEventListener('click', likeClick); //переключатель лайков
-  card.querySelector('.place__image').addEventListener('click', () => openPopupView(name, link));
+  imageCard.addEventListener('click', () => openPopupView(name, link));
 
   return card;
 }
