@@ -98,6 +98,7 @@ function openPopup(popup) {
 function openPopupProfile() {
   popupInputProfileName.value = profileName.textContent;
   popupInputProfileDescription.value = profileDescription.textContent;
+  removeErrorForm(popupProfile); //добавлена очистка от сообщения ошибок от предыдущего открытия
   openPopup(popupProfile);
 }
 //--------------------------------------
@@ -112,7 +113,7 @@ function closePopupEsc(evt) {
 // Закрытие попапа кликом на оверлей
 popupAll.forEach((popup) => {
 
-  popup.addEventListener('mousedown', (evt) => { //заменил click на mousedown
+  popup.addEventListener('mousedown', (evt) => { //заменил click на mousedown чтоб случайно не закрывался попап при уходе с формы в момент нажатия и отпускания кнопки мыши
     console.log(evt.target);
     console.log(evt.currentTarget);
     if (evt.target === evt.currentTarget) {
@@ -135,6 +136,20 @@ function saveProfile(evt) {
   closePopup(popupProfile);
 }
 
+// функция удаления сообщения ошибок в формах - выделением поля и текста об ошибке
+function removeErrorForm(element) {
+  const inputErrorText = element.querySelectorAll('.popup__input-error'); // span для текста ошибок
+  const inputErrorClass = element.querySelectorAll('.popup__input_type_error'); // input выделение поля красной линией, показывая что есть ошибка валидации
+
+  inputErrorText.forEach(element => {
+    element.classList.remove('popup__input-error_active'); //удаляем активизирующий видимость текста об ошибке класс
+  });
+
+  inputErrorClass.forEach(element => {
+    element.classList.remove('popup__input_type_error'); // удаляем класс выделения поля как ошибку валидации
+  });
+};
+
 // ------------------------------------------------слушатели---------------------------------------------------------
 
 editButton.addEventListener('click', openPopupProfile); //слушатель открытия попап профиля по кнопке редактирования профиля
@@ -147,6 +162,7 @@ mestoAddButton.addEventListener('click', () => {
   openPopup(popupMesto);
   popupInputMestoTitle.value = ''; //чтобы очищалось поле при открывании
   popupInputMestoUrlImage.value = ''; //чтобы очищалось поле при открывании
+  removeErrorForm(popupMesto); //добавлена очистка от сообщения ошибок от предыдущего открытия
 }); //слушатель открытия попап добавления места по кнопке добавления места
 
 popupMestoCloseButton.addEventListener('click', () => { closePopup(popupMesto) }); //слушатель закрытия попап места по кнопке закрытия

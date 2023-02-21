@@ -4,8 +4,8 @@ const formsConfig = {
   inputSelector: '.popup__input', //поле
   submitButtonSelector: '.popup__submit-btn', //кнопка сохранить/создать
   inactiveButtonClass: 'popup__submit-btn_disabled', // неактивная кнопка
-  inputErrorClass: 'popup__input_type_error', // выделение поля красной линией, показывая что есть ошибка валидации
-  errorClass: 'popup__input-error_active' // делаем текст ошибки видимым за счет opacity:1
+  inputErrorClass: 'popup__input_type_error', // input выделение поля красной линией, показывая что есть ошибка валидации
+  errorClass: 'popup__input-error_active' // делаем текст ошибки в span под input'ом видимым за счет opacity:1
 }
 
 // функция показа ошибки (красный текст и красная линия в поле)
@@ -52,21 +52,6 @@ const toggleButtonState = (inputList, buttonElement) => {
   }
 }
 
-//-----------------------------------------------------
-
-/*
-Если закрыть модальное окно в невалидном состоянии, а затем открыть его, то будут видны
- блоки ошибок с прошлого раза http://joxi.ru/5mdwDb1c1JvBer, это выглядит странно.
- Предлагаю добавить в validate функцию которая примет DOM-элемент формы, найдет коллекцию полей ввода формы,
-  пройдет в цикле и для каждого поля вызовет функцию удаления ошибки
-http://joxi.ru/xAeP49yT6VYyP2
-Если пользователь удалит все карточки, блок footer отрывается от нижнего края страницы и прижимается
-к информации о пользователе. Лучше добавить для общего контейнера с карточками или всему блоку <main>
-минимальную высоту в относительных единицах (проценты или vh).
-*/
-
-//-----------------------------------------------------
-
 //слушатель форм и их полей
 const setEventListeners = (formSelector) => {
   const inputList = Array.from(formSelector.querySelectorAll(formsConfig.inputSelector)); //список, массив инпутов форм
@@ -96,15 +81,3 @@ const enableValidation = () => {
 
 
 enableValidation();
-
-const removeError = () => {
-  const inputList = Array.from(document.querySelectorAll(formsConfig.inputSelector));
-  inputList.forEach((inputSelector) => {
-    if (inputSelector.validity.valid) {
-      hideInputError(formSelector, inputSelector);
-    }
-  })
-}
-
-removeError();
-
