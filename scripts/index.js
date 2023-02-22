@@ -100,6 +100,7 @@ function openPopupProfile() {
   popupInputProfileDescription.value = profileDescription.textContent;
   removeErrorForm(popupProfile); //добавлена очистка от сообщения ошибок от предыдущего открытия
   openPopup(popupProfile);
+  setEventListeners(popupProfile);//добавил для постоянной проверки при открывании этого попапа соответсвующего отображения кнопки сабмита
 }
 //--------------------------------------
 // функция для закрытия попап по нажатию на Escape
@@ -162,6 +163,7 @@ mestoAddButton.addEventListener('click', () => {
   openPopup(popupMesto);
   popupInputMestoTitle.value = ''; //чтобы очищалось поле при открывании
   popupInputMestoUrlImage.value = ''; //чтобы очищалось поле при открывании
+  setEventListeners(popupMesto); //добавил для постоянной проверки при открывании этого попапа соответсвующего отображения кнопки сабмита
   removeErrorForm(popupMesto); //добавлена очистка от сообщения ошибок от предыдущего открытия
 }); //слушатель открытия попап добавления места по кнопке добавления места
 
