@@ -81,3 +81,10 @@ const enableValidation = () => {
 
 
 enableValidation();
+
+//функция отключения кнопки сабмита в соответсвующем попапе
+function disabledSubmitButton(popup) {
+  const buttonElement = popup.querySelector(formsConfig.submitButtonSelector);
+  buttonElement.classList.add(formsConfig.inactiveButtonClass);
+  buttonElement.setAttribute('disabled', 'true');
+}
