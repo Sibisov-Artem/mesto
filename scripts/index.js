@@ -84,8 +84,8 @@ formAddMesto.addEventListener('submit', (evt) => {
   const link = popupInputMestoUrlImage.value; // в переменную link ставим значение, которое будет введено в поле ссылки на картинку
 
   const card = createCard(name, link)
-  closePopup(popupMesto); // закрытие попап место
   list.prepend(card);
+  closePopup(popupMesto); // закрытие попап место
 })
 
 // общая функция открытия попап
