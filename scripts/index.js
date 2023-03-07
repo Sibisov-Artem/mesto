@@ -1,3 +1,8 @@
+import { initialCards } from "./cards.js";
+import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
+
+
 const page = document.querySelector('.page');
 const content = page.querySelector('.content');
 const profile = content.querySelector('.profile');
