@@ -134,8 +134,8 @@ function closePopupEsc(evt) {
 popupAll.forEach((popup) => {
 
   popup.addEventListener('mousedown', (evt) => { //заменил click на mousedown чтоб случайно не закрывался попап при уходе с формы в момент нажатия и отпускания кнопки мыши
-    console.log(evt.target);
-    console.log(evt.currentTarget);
+    // console.log(evt.target);
+    // console.log(evt.currentTarget);
     if (evt.target === evt.currentTarget) {
       closePopup(popup)
     }
