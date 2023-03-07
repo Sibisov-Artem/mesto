@@ -1,8 +1,47 @@
-import { initialCards } from "./cards.js";
 import Card from "./Card.js";
-import FormValidator from "./FormValidator.js";
+// import FormValidator from "./FormValidator.js";
 
 
+//набор карточек для отображения
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
+// -------------------------------------------------------------------------------------------------
+// объект классов для приема к функции enableValidation
+const formsConfig = {
+  formSelector: '.popup__form', // форма
+  inputSelector: '.popup__input', //поле
+  submitButtonSelector: '.popup__submit-btn', //кнопка сохранить/создать
+  inactiveButtonClass: 'popup__submit-btn_disabled', // неактивная кнопка
+  inputErrorClass: 'popup__input_type_error', // input выделение поля красной линией, показывая что есть ошибка валидации
+  errorClass: 'popup__input-error_active' // делаем текст ошибки в span под input'ом видимым за счет opacity:1
+}
+
+// ---------------------------------------------------------------------------------------------------
 const page = document.querySelector('.page');
 const content = page.querySelector('.content');
 const profile = content.querySelector('.profile');
@@ -40,9 +79,9 @@ const imageCaption = document.querySelector('.popup__image-caption'); // опи�
 //------------------------------------создание карточки (экземпляр класса Card ) ------------------------------------
 
 function createCard(name, link) {
-const card = new Card(name, link, openPopupView);
-const cardElement = card.createCard();
-return cardElement;
+  const card = new Card(name, link, openPopupView);
+  const cardElement = card.createCard();
+  return cardElement;
 }
 
 

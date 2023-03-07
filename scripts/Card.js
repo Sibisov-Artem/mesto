@@ -28,8 +28,6 @@ export default class Card {
       this._deleteClick(event)
     });
 
-
-
     //переключатель лайков
     this._element.querySelector('.place__like-btn').addEventListener('click', (event) => {
       this._likeClick(event)
@@ -40,15 +38,9 @@ export default class Card {
       this._openPopupView(this._name, this._link)
     });
 
-
-
-
     return this._element;
-
-
-
-
   }
+
 
   //функция удаления по клику по корзинке через target и closest для createCard
   _deleteClick(event) {
