@@ -37,31 +37,45 @@ const popupViewCloseButton = document.querySelector('.popup__close-btn_view'); /
 const image = document.querySelector('.popup__image'); // картинка просмотра
 const imageCaption = document.querySelector('.popup__image-caption'); // описание к картинке
 
+//------------------------------------создание карточки (экземпляр класса Card ) ------------------------------------
+
+function createCard(name, link) {
+const card = new Card(name, link, openPopupView);
+const cardElement = card.createCard();
+return cardElement;
+}
+
+
 // ----------------------------------функции-------------------------------------------------------
 
-//функция удаления по клику по корзинке через target и closest для createCard
-function deleteClick(event) {
-  event.target.closest('.place__card').remove();
-}
 
-// функция переключателя лайков на карточки для createCard
-function likeClick(event) {
-  event.target.classList.toggle('place__like-btn_active');
-}
+//функция удаления по клику по корзинке через target и closest для createCard
+// function deleteClick(event) {
+//   event.target.closest('.place__card').remove();
+// }
+
+// // функция переключателя лайков на карточки для createCard
+// function likeClick(event) {
+//   event.target.classList.toggle('place__like-btn_active');
+// }
 
 // функция создания и просмотра карточки
-function createCard(name, link) {
-  const card = template.cloneNode(true);
-  const imageCard = card.querySelector('.place__image');
-  card.querySelector('.place__title').textContent = name; // название картинки (title)
-  imageCard.src = link; //ссылка на картинку
-  imageCard.alt = name; //alt описание к картинке
-  card.querySelector('.place__wastebasket-btn').addEventListener('click', deleteClick); //удаление картинки по клику на корзинку
-  card.querySelector('.place__like-btn').addEventListener('click', likeClick); //переключатель лайков
-  imageCard.addEventListener('click', () => openPopupView(name, link));
+// function createCard(name, link) {
+//   const card = template.cloneNode(true);
 
-  return card;
-}
+//   card.querySelector('.place__title').textContent = name; // название картинки (title)
+
+//   const imageCard = card.querySelector('.place__image');
+//   imageCard.src = link; //ссылка на картинку
+//   imageCard.alt = name; //alt описание к картинке
+//   card.querySelector('.place__wastebasket-btn').addEventListener('click', deleteClick); //удаление картинки по клику на корзинку
+//   card.querySelector('.place__like-btn').addEventListener('click', likeClick); //переключатель лайков
+//   imageCard.addEventListener('click', () => openPopupView(name, link));
+
+//   return card;
+// }
+
+
 
 //  функция открытия попап просмотра картинки
 function openPopupView(name, link) {
@@ -175,4 +189,3 @@ mestoAddButton.addEventListener('click', () => {
 popupMestoCloseButton.addEventListener('click', () => { closePopup(popupMesto) }); //слушатель закрытия попап места по кнопке закрытия
 
 popupViewCloseButton.addEventListener('click', () => { closePopup(popupView) }); //слушатель закрытия попап просмотра картинки по кнопке закрытия
-
