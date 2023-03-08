@@ -143,7 +143,6 @@ function openPopupProfile() {
   popupInputProfileDescription.value = profileDescription.textContent;
   removeErrorForm(popupProfile); //добавлена очистка от сообщения ошибок от предыдущего открытия
   openPopup(popupProfile);
-  //addFormValidatorProfile.disabledSubmitButton(); // деактивируем кнопку сабмита при открывании этого попапа
   addFormValidatorProfile.enableValidation();
 }
 //--------------------------------------------------
@@ -205,14 +204,14 @@ popupProfileCloseButton.addEventListener('click', () => { closePopup(popupProfil
 
 formElementProfile.addEventListener('submit', saveProfile); //слушатель сохранения профиля
 
+//слушатель открытия попап добавления места по кнопке добавления места
 mestoAddButton.addEventListener('click', () => {
   openPopup(popupMesto);
   popupInputMestoTitle.value = ''; //чтобы очищалось поле при открывании
   popupInputMestoUrlImage.value = ''; //чтобы очищалось поле при открывании
-  // addFormValidatorMesto.disabledSubmitButton(); // деактивируем кнопку сабмита при открывании этого попапа
   addFormValidatorMesto.enableValidation();
   removeErrorForm(popupMesto); //добавлена очистка от сообщения ошибок от предыдущего открытия
-}); //слушатель открытия попап добавления места по кнопке добавления места
+});
 
 popupMestoCloseButton.addEventListener('click', () => { closePopup(popupMesto) }); //слушатель закрытия попап места по кнопке закрытия
 
