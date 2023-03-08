@@ -1,5 +1,5 @@
 import Card from "./Card.js";
-// import FormValidator from "./FormValidator.js";
+import FormValidator from "./FormValidator.js";
 
 
 //набор карточек для отображения
@@ -76,13 +76,7 @@ const popupViewCloseButton = document.querySelector('.popup__close-btn_view'); /
 const image = document.querySelector('.popup__image'); // картинка просмотра
 const imageCaption = document.querySelector('.popup__image-caption'); // описание к картинке
 
-//------------------------------------создание карточки (экземпляр класса Card ) ------------------------------------
 
-function createCard(name, link) {
-  const card = new Card(name, link, openPopupView);
-  const cardElement = card.createCard();
-  return cardElement;
-}
 
 
 // ----------------------------------функции-------------------------------------------------------
@@ -114,8 +108,19 @@ function createCard(name, link) {
 //   return card;
 // }
 
+//------------------------------------создание карточки (экземпляр класса Card ) ------------------------------------
 
+function createCard(name, link) {
+  const card = new Card(name, link, openPopupView);
+  const cardElement = card.createCard();
+  return cardElement;
+}
+//-----------------------------------------------------------------------------------------------------------------
 
+//-----------------------------подключение валидации форм через создание экземпляра класса FormValidator----------
+const addFormValidator = new FormValidator(formsConfig, )
+
+//--------------------------------------------------------------------------------------------------------------
 //  функция открытия попап просмотра картинки
 function openPopupView(name, link) {
   image.src = link;
