@@ -11,7 +11,6 @@ export default class FormValidator {
     this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
     this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
 
-
   }
 
 
@@ -24,6 +23,7 @@ _showInputError = (input, errorMessage) => {
   errorElement.classList.add(this._errorClass); // делаем сообщение ошибки видимым добавлением классу к инпуту
 };
 
+
 // функция скрытия поля с ошибкой и показа ошибки
 _hideInputError = (input) => {
   const errorElement = this._formElement.querySelector(`.${input.id}-error`);
@@ -31,6 +31,7 @@ _hideInputError = (input) => {
   errorElement.classList.remove(this._errorClass);
   errorElement.textContent = '';
 };
+
 
 // функция прохождения валидации поля
 _checkInputValidity = (input) => {
@@ -41,12 +42,14 @@ _checkInputValidity = (input) => {
   }
 };
 
+
 // функция проверки инпутов на валидность
 _hasInvalidInput = () => {
   return this._inputList.some((input) => {
       return !input.validity.valid;
   })
 };
+
 
 //функция переключения состония кнопки
 _toggleButtonState = () => {
@@ -59,19 +62,6 @@ _toggleButtonState = () => {
   }
 }
 
-//слушатель форм и их полей
-_setEventListeners = () => {
-
-  // toggleButtonState();
-
-  this._inputList.forEach((input) => {
-    input.addEventListener('input', () => {
-      this._checkInputValidity(input);
-
-          this._toggleButtonState();
-      });
-  });
-};
 
 //функция валидации форм
 enableValidation = () => {
@@ -83,14 +73,24 @@ this._disabledSubmitButton();
 };
 
 
-// enableValidation();
-
-//функция отключения кнопки сабмита в соответсвующем попапе
+//функция отключения кнопки сабмита при открытии попапа
 _disabledSubmitButton() {
-  this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
   this._buttonElement.classList.add(this._inactiveButtonClass);
   this._buttonElement.setAttribute('disabled', 'true');
 }
+
+
+//слушатель полей форм
+_setEventListeners = () => {
+
+  this._inputList.forEach((input) => {
+    input.addEventListener('input', () => {
+      this._checkInputValidity(input);
+
+          this._toggleButtonState();
+      });
+  });
+};
 
 
 }
