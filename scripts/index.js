@@ -82,32 +82,6 @@ const imageCaption = document.querySelector('.popup__image-caption'); // опи�
 // ----------------------------------функции-------------------------------------------------------
 
 
-//функция удаления по клику по корзинке через target и closest для createCard
-// function deleteClick(event) {
-//   event.target.closest('.place__card').remove();
-// }
-
-// // функция переключателя лайков на карточки для createCard
-// function likeClick(event) {
-//   event.target.classList.toggle('place__like-btn_active');
-// }
-
-// функция создания и просмотра карточки
-// function createCard(name, link) {
-//   const card = template.cloneNode(true);
-
-//   card.querySelector('.place__title').textContent = name; // название картинки (title)
-
-//   const imageCard = card.querySelector('.place__image');
-//   imageCard.src = link; //ссылка на картинку
-//   imageCard.alt = name; //alt описание к картинке
-//   card.querySelector('.place__wastebasket-btn').addEventListener('click', deleteClick); //удаление картинки по клику на корзинку
-//   card.querySelector('.place__like-btn').addEventListener('click', likeClick); //переключатель лайков
-//   imageCard.addEventListener('click', () => openPopupView(name, link));
-
-//   return card;
-// }
-
 //------------------------------------создание карточки (экземпляр класса Card ) ------------------------------------
 
 function createCard(name, link) {
@@ -172,7 +146,7 @@ function openPopupProfile() {
   //addFormValidatorProfile.disabledSubmitButton(); // деактивируем кнопку сабмита при открывании этого попапа
   addFormValidatorProfile.enableValidation();
 }
-//--------------------------------------
+//--------------------------------------------------
 // функция для закрытия попап по нажатию на Escape
 function closePopupEsc(evt) {
   if (evt.key === "Escape") {
@@ -180,7 +154,7 @@ function closePopupEsc(evt) {
     closePopup(popupOpened);
   }
 }
-//------------------------------------
+
 // Закрытие попапа кликом на оверлей
 popupAll.forEach((popup) => {
 
@@ -192,7 +166,9 @@ popupAll.forEach((popup) => {
     }
   });
 })
-//------------------------------------
+
+//-------------------------------------------------
+
 // общая функция закрытия попап
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
