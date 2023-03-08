@@ -117,10 +117,16 @@ function createCard(name, link) {
 }
 //-----------------------------------------------------------------------------------------------------------------
 
-//-----------------------------подключение валидации форм через создание экземпляра класса FormValidator----------
-const addFormValidator = new FormValidator(formsConfig, )
+//---------------подключение валидации к форме профиля через создание экземпляра класса FormValidator----------
+const addFormValidatorProfile = new FormValidator(formsConfig, popupProfile);
 
 //--------------------------------------------------------------------------------------------------------------
+
+//----------подключение валидации к форме добавления места через создание экземпляра класса FormValidator--------
+const addFormValidatorMesto = new FormValidator(formsConfig, popupMesto);
+
+//--------------------------------------------------------------------------------------------------------------
+
 //  функция открытия попап просмотра картинки
 function openPopupView(name, link) {
   image.src = link;
@@ -163,7 +169,8 @@ function openPopupProfile() {
   popupInputProfileDescription.value = profileDescription.textContent;
   removeErrorForm(popupProfile); //добавлена очистка от сообщения ошибок от предыдущего открытия
   openPopup(popupProfile);
-  disabledSubmitButton(popupProfile); // деактивируем кнопку сабмита при открывании этого попапа
+  //addFormValidatorProfile.disabledSubmitButton(); // деактивируем кнопку сабмита при открывании этого попапа
+  addFormValidatorProfile.enableValidation();
 }
 //--------------------------------------
 // функция для закрытия попап по нажатию на Escape
@@ -226,7 +233,8 @@ mestoAddButton.addEventListener('click', () => {
   openPopup(popupMesto);
   popupInputMestoTitle.value = ''; //чтобы очищалось поле при открывании
   popupInputMestoUrlImage.value = ''; //чтобы очищалось поле при открывании
-  disabledSubmitButton(popupMesto); // деактивируем кнопку сабмита при открывании этого попапа
+  // addFormValidatorMesto.disabledSubmitButton(); // деактивируем кнопку сабмита при открывании этого попапа
+  addFormValidatorMesto.enableValidation();
   removeErrorForm(popupMesto); //добавлена очистка от сообщения ошибок от предыдущего открытия
 }); //слушатель открытия попап добавления места по кнопке добавления места
 

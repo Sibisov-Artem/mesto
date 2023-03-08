@@ -6,7 +6,10 @@ export default class FormValidator {
     this._inactiveButtonClass = formsConfig.inactiveButtonClass;
     this._inputErrorClass = formsConfig.inputErrorClass;
     this._errorClass = formsConfig.errorClass;
-    this._formSelector = formElement;
+    this._formElement = formElement;
+
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+    this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
 
 
   }
@@ -14,83 +17,79 @@ export default class FormValidator {
 
 // функция показа ошибки (красный текст и красная линия в поле)
 //errorElement - это соответсвующий класс span'a определенного поля
-_showInputError = (formSelector, inputSelector, errorMessage) => {
-  const errorElement = formSelector.querySelector(`.${inputSelector.id}-error`);
-  inputSelector.classList.add(this._inputErrorClass); // подключение класса для инпута с красной линией
+_showInputError = (input, errorMessage) => {
+  const errorElement = this._formElement.querySelector(`.${input.id}-error`);
+  input.classList.add(this._inputErrorClass); // подключение класса для инпута с красной линией
   errorElement.textContent = errorMessage; //текст для спана из стандартной браузерной ошибки
   errorElement.classList.add(this._errorClass); // делаем сообщение ошибки видимым добавлением классу к инпуту
 };
 
 // функция скрытия поля с ошибкой и показа ошибки
-_hideInputError = (formSelector, inputSelector) => {
-  const errorElement = formSelector.querySelector(`.${inputSelector.id}-error`);
-  inputSelector.classList.remove(this._inputErrorClass);
+_hideInputError = (input) => {
+  const errorElement = this._formElement.querySelector(`.${input.id}-error`);
+  input.classList.remove(this._inputErrorClass);
   errorElement.classList.remove(this._errorClass);
   errorElement.textContent = '';
 };
 
 // функция прохождения валидации поля
-_checkInputValidity = (formSelector, inputSelector) => {
-  if (!inputSelector.validity.valid) {
-    this._showInputError(formSelector, inputSelector, inputSelector.validationMessage);
+_checkInputValidity = (input) => {
+  if (!input.validity.valid) {
+    this._showInputError(input, input.validationMessage);
   } else {
-    this._hideInputError(formSelector, inputSelector);
+    this._hideInputError(input);
   }
 };
 
 // функция проверки инпутов на валидность
-_hasInvalidInput = (inputList) => {
-  return inputList.some((inputSelector) => {
-      return !inputSelector.validity.valid;
+_hasInvalidInput = () => {
+  return this._inputList.some((input) => {
+      return !input.validity.valid;
   })
 };
 
 //функция переключения состония кнопки
-_toggleButtonState = (inputList, buttonElement) => {
-  if (this._hasInvalidInput(inputList)) {
-      buttonElement.classList.add(this._inactiveButtonClass);
-      buttonElement.setAttribute('disabled', 'true');
+_toggleButtonState = () => {
+  if (this._hasInvalidInput()) {
+    this._buttonElement.classList.add(this._inactiveButtonClass);
+    this._buttonElement.setAttribute('disabled', 'true');
   } else {
-      buttonElement.classList.remove(this._inactiveButtonClass);
-      buttonElement.removeAttribute('disabled', 'true');
+    this._buttonElement.classList.remove(this._inactiveButtonClass);
+    this._buttonElement.removeAttribute('disabled', 'true');
   }
 }
 
 //слушатель форм и их полей
-_setEventListeners = (formSelector) => {
-  const inputList = Array.from(formSelector.querySelectorAll(formsConfig.inputSelector)); //список, массив инпутов форм
-  const buttonElement = formSelector.querySelector(formsConfig.submitButtonSelector);
+_setEventListeners = () => {
 
-  toggleButtonState(inputList, buttonElement);
+  // toggleButtonState();
 
-  inputList.forEach((inputSelector) => {
-      inputSelector.addEventListener('input', function () {
-          checkInputValidity(formSelector, inputSelector);
+  this._inputList.forEach((input) => {
+    input.addEventListener('input', () => {
+      this._checkInputValidity(input);
 
-          toggleButtonState(inputList, buttonElement);
+          this._toggleButtonState();
       });
   });
 };
 
 //функция валидации форм
 enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll(this._formSelector));
-  formList.forEach((formSelector) => {
-      formSelector.addEventListener('submit', function (evt) {
-          evt.preventDefault();
-      });
-          this._setEventListeners(formSelector);
-      });
+  this._formElement.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+});
+this._setEventListeners();
+this._disabledSubmitButton();
 };
 
 
 // enableValidation();
 
 //функция отключения кнопки сабмита в соответсвующем попапе
-_disabledSubmitButton(popup) {
-  const buttonElement = popup.querySelector(this._submitButtonSelector);
-  buttonElement.classList.add(this._inactiveButtonClass);
-  buttonElement.setAttribute('disabled', 'true');
+_disabledSubmitButton() {
+  this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
+  this._buttonElement.classList.add(this._inactiveButtonClass);
+  this._buttonElement.setAttribute('disabled', 'true');
 }
 
 
