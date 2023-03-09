@@ -63,7 +63,6 @@ export default class FormValidator {
 
   // метод для очистки ошибок и управления кнопкой
   resetValidation() {
-    this._toggleButtonState();
     this._disabledSubmitButton();
     this._inputList.forEach((input) => {
       this._hideInputError(input)
