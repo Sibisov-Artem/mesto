@@ -62,9 +62,6 @@ const popupMesto = document.querySelector('.popup_mesto'); //попап доба
 const mestoAddButton = profile.querySelector('.profile__add-btn'); //кнопка открытия попап добавления места
 const popupMestoCloseButton = document.querySelector('.popup__close-btn_mesto'); //кнопка закрытия попап добавления места
 
-const likeButton = document.querySelectorAll('.place__like-btn'); //кнопка лайк
-
-const template = document.querySelector('.card-template').content.querySelector('.place__card'); // тэмплейт и его контент-карточка
 const list = document.querySelector('.place__grid'); // список, внутрь которого будут вставать карточки
 const formAddMesto = document.querySelector('.popup__form_mesto'); //форма попап добавления места
 const popupInputMestoTitle = document.querySelector('.popup__input_el_mesto-title'); //поле имени места
@@ -85,20 +82,19 @@ const imageCaption = document.querySelector('.popup__image-caption'); // опи�
 //------------------------------------создание карточки (экземпляр класса Card ) ------------------------------------
 
 function createCard(name, link) {
-  const card = new Card(name, link, openPopupView);
+  const card = new Card(name, link, '.card-template', openPopupView);
   const cardElement = card.createCard();
   return cardElement;
 }
 //-----------------------------------------------------------------------------------------------------------------
 
 //---------------подключение валидации к форме профиля через создание экземпляра класса FormValidator----------
-const addFormValidatorProfile = new FormValidator(formsConfig, popupProfile);
-
-//--------------------------------------------------------------------------------------------------------------
+const profileValidator = new FormValidator(formsConfig, popupProfile);
+profileValidator.enableValidation();
 
 //----------подключение валидации к форме добавления места через создание экземпляра класса FormValidator--------
-const addFormValidatorMesto = new FormValidator(formsConfig, popupMesto);
-
+const mestoValidator = new FormValidator(formsConfig, popupMesto);
+mestoValidator.enableValidation();
 //--------------------------------------------------------------------------------------------------------------
 
 //  функция открытия попап просмотра картинки
@@ -141,9 +137,7 @@ function openPopup(popup) {
 function openPopupProfile() {
   popupInputProfileName.value = profileName.textContent;
   popupInputProfileDescription.value = profileDescription.textContent;
-  removeErrorForm(popupProfile); //добавлена очистка от сообщения ошибок от предыдущего открытия
   openPopup(popupProfile);
-  addFormValidatorProfile.enableValidation();
 }
 //--------------------------------------------------
 // функция для закрытия попап по нажатию на Escape
@@ -182,36 +176,29 @@ function saveProfile(evt) {
   closePopup(popupProfile);
 }
 
-// функция удаления сообщения ошибок в формах - выделением поля и текста об ошибке
-function removeErrorForm(element) {
-  const inputErrorText = element.querySelectorAll('.popup__input-error'); // span для текста ошибок
-  const inputErrorClass = element.querySelectorAll('.popup__input_type_error'); // input выделение поля красной линией, показывая что есть ошибка валидации
-
-  inputErrorText.forEach(element => {
-    element.classList.remove('popup__input-error_active'); //удаляем активизирующий видимость текста об ошибке класс
-  });
-
-  inputErrorClass.forEach(element => {
-    element.classList.remove('popup__input_type_error'); // удаляем класс выделения поля как ошибку валидации
-  });
-};
 
 // ------------------------------------------------слушатели---------------------------------------------------------
+//слушатель открытия попап профиля по кнопке редактирования профиля
+editButton.addEventListener('click', () => {
+  openPopupProfile();
+  profileValidator.resetValidation();
+}
+);
 
-editButton.addEventListener('click', openPopupProfile); //слушатель открытия попап профиля по кнопке редактирования профиля
-
-popupProfileCloseButton.addEventListener('click', () => { closePopup(popupProfile) }); //слушатель закрытия попап профиля по кнопке закрытия
 
 formElementProfile.addEventListener('submit', saveProfile); //слушатель сохранения профиля
 
 //слушатель открытия попап добавления места по кнопке добавления места
 mestoAddButton.addEventListener('click', () => {
   openPopup(popupMesto);
+  mestoValidator.resetValidation();
   popupInputMestoTitle.value = ''; //чтобы очищалось поле при открывании
   popupInputMestoUrlImage.value = ''; //чтобы очищалось поле при открывании
-  addFormValidatorMesto.enableValidation();
-  removeErrorForm(popupMesto); //добавлена очистка от сообщения ошибок от предыдущего открытия
 });
+
+
+
+popupProfileCloseButton.addEventListener('click', () => { closePopup(popupProfile) }); //слушатель закрытия попап профиля по кнопке закрытия
 
 popupMestoCloseButton.addEventListener('click', () => { closePopup(popupMesto) }); //слушатель закрытия попап места по кнопке закрытия
 
