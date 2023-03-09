@@ -45,7 +45,7 @@ const formsConfig = {
 const page = document.querySelector('.page');
 const content = page.querySelector('.content');
 const profile = content.querySelector('.profile');
-const popupAll = document.querySelectorAll('.popup') // использую для закрытия по оверлею
+const popupAll = document.querySelectorAll('.popup'); // использую для закрытия по оверлею
 
 //---------------------------попап профиль------------------------------------------------------------------
 const popupProfile = document.querySelector('.popup_profile'); //попап профиля
@@ -55,12 +55,10 @@ const editButton = profile.querySelector('.profile__edit-btn');  //кнопка 
 const formElementProfile = popupProfile.querySelector('.popup__form_profile'); //форма попап профиля
 const popupInputProfileName = popupProfile.querySelector('.popup__input_el_name'); //поле имени профиля
 const popupInputProfileDescription = popupProfile.querySelector('.popup__input_el_description'); //поле описания профиля
-const popupProfileCloseButton = document.querySelector('.popup__close-btn_profile'); //кнопка закрытия попап профиля
 
 //---------------------------попап добавления места------------------------------------------------------------------
 const popupMesto = document.querySelector('.popup_mesto'); //попап добавления места
 const mestoAddButton = profile.querySelector('.profile__add-btn'); //кнопка открытия попап добавления места
-const popupMestoCloseButton = document.querySelector('.popup__close-btn_mesto'); //кнопка закрытия попап добавления места
 
 const list = document.querySelector('.place__grid'); // список, внутрь которого будут вставать карточки
 const formAddMesto = document.querySelector('.popup__form_mesto'); //форма попап добавления места
@@ -69,7 +67,6 @@ const popupInputMestoUrlImage = document.querySelector('.popup__input_el_mesto-u
 
 //---------------------------попап просмотра картинок------------------------------------------------------------------
 const popupView = document.querySelector('.popup_view'); //попап просмотра картинки
-const popupViewCloseButton = document.querySelector('.popup__close-btn_view'); //кнопка закрытия просмотра картинки
 const image = document.querySelector('.popup__image'); // картинка просмотра
 const imageCaption = document.querySelector('.popup__image-caption'); // описание к картинке
 
@@ -196,10 +193,7 @@ mestoAddButton.addEventListener('click', () => {
   popupInputMestoUrlImage.value = ''; //чтобы очищалось поле при открывании
 });
 
-
-
-popupProfileCloseButton.addEventListener('click', () => { closePopup(popupProfile) }); //слушатель закрытия попап профиля по кнопке закрытия
-
-popupMestoCloseButton.addEventListener('click', () => { closePopup(popupMesto) }); //слушатель закрытия попап места по кнопке закрытия
-
-popupViewCloseButton.addEventListener('click', () => { closePopup(popupView) }); //слушатель закрытия попап просмотра картинки по кнопке закрытия
+document.querySelectorAll('.popup__close-btn').forEach(button => {
+  const buttonsPopup = button.closest('.popup'); // нашли родителя с нужным классом
+  button.addEventListener('click', () => closePopup(buttonsPopup)); // закрыли попап
+});
