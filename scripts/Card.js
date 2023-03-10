@@ -1,8 +1,8 @@
 export default class Card {
-  constructor(name, link, templateSelector, openPopupView) {
+  constructor(name, link, templateSelector, openPreviewPopup) {
     this._name = name;
     this._link = link;
-    this._openPopupView = openPopupView;
+    this._openPreviewPopup = openPreviewPopup;
     this._templateSelector = templateSelector;
 
   }
@@ -10,11 +10,8 @@ export default class Card {
   //создание копии template
   _getTemplate() {
     const cardElement = document.querySelector(this._templateSelector).content.querySelector('.place__card').cloneNode(true);
-
     return cardElement;
   }
-
-
 
   //функция удаления по клику по корзинке через target и closest для createCard
   _deleteClick() {
@@ -26,7 +23,6 @@ export default class Card {
   _likeClick() {
     this._likeButton.classList.toggle('place__like-btn_active');
   }
-
 
   _setEventListeners = () => {
     //удаление картинки по клику на корзинку
@@ -42,7 +38,7 @@ export default class Card {
 
     //просмотр картинки в попапе
     this._cardImage.addEventListener('click', () => {
-      this._openPopupView(this._name, this._link)
+      this._openPreviewPopup(this._name, this._link)
     });
 
   }
@@ -59,8 +55,6 @@ export default class Card {
     this._cardImage = this._element.querySelector('.place__image');
     this._cardImage.src = this._link; //ссылка на картинку
     this._cardImage.alt = this._name; //alt описание к картинке
-
-
 
     this._setEventListeners();
 

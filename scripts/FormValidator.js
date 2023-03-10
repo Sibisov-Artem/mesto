@@ -21,8 +21,7 @@ export default class FormValidator {
     input.classList.add(this._inputErrorClass); // подключение класса для инпута с красной линией
     errorElement.textContent = errorMessage; //текст для спана из стандартной браузерной ошибки
     errorElement.classList.add(this._errorClass); // делаем сообщение ошибки видимым добавлением классу к инпуту
-  };
-
+  }
 
   // функция скрытия поля с ошибкой и показа ошибки
   _hideInputError = (input) => {
@@ -30,8 +29,7 @@ export default class FormValidator {
     input.classList.remove(this._inputErrorClass);
     errorElement.classList.remove(this._errorClass);
     errorElement.textContent = '';
-  };
-
+  }
 
   // функция прохождения валидации поля
   _checkInputValidity = (input) => {
@@ -40,16 +38,14 @@ export default class FormValidator {
     } else {
       this._hideInputError(input);
     }
-  };
-
+  }
 
   // функция проверки инпутов на валидность
   _hasInvalidInput = () => {
     return this._inputList.some((input) => {
       return !input.validity.valid;
     })
-  };
-
+  }
 
   //функция переключения состония кнопки
   _toggleButtonState = () => {
@@ -67,7 +63,6 @@ export default class FormValidator {
     this._inputList.forEach((input) => {
       this._hideInputError(input)
     });
-
   }
 
   //функция отключения кнопки сабмита при открытии попапа
@@ -76,28 +71,21 @@ export default class FormValidator {
     this._buttonElement.setAttribute('disabled', 'true');
   }
 
-
   //слушатель полей форм
   _setEventListeners = () => {
 
     this._inputList.forEach((input) => {
       input.addEventListener('input', () => {
         this._checkInputValidity(input);
-
         this._toggleButtonState();
       });
     });
-
-    this._formElement.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-    });
-  };
-
+  }
 
   //функция валидации форм
   enableValidation = () => {
     this._setEventListeners();
     this._disabledSubmitButton();
-  };
+  }
 
 }
