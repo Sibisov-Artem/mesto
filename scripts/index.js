@@ -189,6 +189,7 @@ newCardForm.addEventListener('submit', (evt) => {
 
   const card = createCard(name, link)
   listForCards.prepend(card);
+  newCardValidator.resetValidation(); //чтоб кнопка задезейблилась и не успелось понаставиться картинок
   closePopup(newCardPopup); // закрытие попап место
 })
 
