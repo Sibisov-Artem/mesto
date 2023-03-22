@@ -104,17 +104,49 @@ function openPreviewPopup(name, link) {
   openPopup(previewPopup);
 }
 
+const cardsList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const card = createCard(item.name, item.link);
+    cardsList.addItem(card);
+
+  }
+}, listForCards
+);
+
+cardsList.renderItems();
+
+
+//---------------------------------------------
+/*
 // функция отображения карточек
 function renderCards(name, link) {
   const card = createCard(name, link);
   listForCards.append(card);
 }
 
+заменяется этим из класса Section:
+addItem(element) {
+  this._container.append(element);
+}
+*/
+//--------------------------------------------
+
+
+//---------------------------------------------------
+/*
 //вызов функции отображения карточек из массива
 initialCards.forEach((item) => {
   renderCards(item.name, item.link);
 })
 
+заменяется этим из класса Section:
+renderItems() {
+  this._initialArray.forEach(item => {
+    this._renderer(item); // вызываем renderer, передав item
+  });
+} */
+//------------------------------------------------------------
 
 
 // общая функция открытия попап
