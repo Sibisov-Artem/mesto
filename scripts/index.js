@@ -70,8 +70,8 @@ const newCardUrlInput = document.querySelector('.popup__input_el_mesto-url'); //
 
 //---------------------------попап просмотра картинок-----------------------------
 const previewPopup = new PopupWithImage('.popup_view'); //попап просмотра картинки
-const previewImage = document.querySelector('.popup__image'); // картинка просмотра
-const imageCaption = document.querySelector('.popup__image-caption'); // описание к картинке
+// const previewImage = document.querySelector('.popup__image'); // картинка просмотра
+// const imageCaption = document.querySelector('.popup__image-caption'); // описание к картинке
 
 
 
