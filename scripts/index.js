@@ -1,6 +1,8 @@
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 import Section from "./Section.js";
+import PopupWithImage from "./PopupWithImage.js";
+
 
 
 //набор карточек для отображения
@@ -67,7 +69,7 @@ const newCardTitleInput = document.querySelector('.popup__input_el_mesto-title')
 const newCardUrlInput = document.querySelector('.popup__input_el_mesto-url'); //поле адреса картинки
 
 //---------------------------попап просмотра картинок-----------------------------
-const previewPopup = document.querySelector('.popup_view'); //попап просмотра картинки
+const previewPopup = new PopupWithImage('.popup_view'); //попап просмотра картинки
 const previewImage = document.querySelector('.popup__image'); // картинка просмотра
 const imageCaption = document.querySelector('.popup__image-caption'); // описание к картинке
 
@@ -75,7 +77,11 @@ const imageCaption = document.querySelector('.popup__image-caption'); // опи�
 
 // ----------------------------------функции--------------------------------------
 
+previewPopup.setEventListeners();
 
+function openPreviewPopup (name, link) {
+  previewPopup.open(name, link);
+}
 //----------------создание карточки (экземпляр класса Card ) ---------------------
 
 function createCard(name, link) {
@@ -96,6 +102,7 @@ const newCardValidator = new FormValidator(formsConfig, newCardPopup);
 newCardValidator.enableValidation();
 //--------------------------------------------------------------------------------
 
+/*********************************************
 //  функция открытия попап просмотра картинки
 function openPreviewPopup(name, link) {
   previewImage.src = link;
@@ -103,6 +110,7 @@ function openPreviewPopup(name, link) {
   imageCaption.textContent = name;
   openPopup(previewPopup);
 }
+**********************************************/
 
 const cardsList = new Section({
   items: initialCards,
@@ -148,12 +156,13 @@ renderItems() {
 } */
 //------------------------------------------------------------
 
-
+/******************************************************
 // общая функция открытия попап
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupEsc) // вешаю слушатель при открытом окне на закрытие по Escape
 }
+*************************************************************/
 
 // функция открытия попап профиля
 function openProfilePopup() {
@@ -162,6 +171,7 @@ function openProfilePopup() {
   openPopup(profilePopup);
 }
 
+/*******************************************
 // функция для закрытия попап по нажатию на Escape
 function closePopupEsc(evt) {
   if (evt.key === "Escape") {
@@ -169,7 +179,9 @@ function closePopupEsc(evt) {
     closePopup(popupOpened);
   }
 }
+*******************************************/
 
+/********************************************
 // Закрытие попапа кликом на оверлей
 popupAll.forEach((popup) => {
 
@@ -181,13 +193,14 @@ popupAll.forEach((popup) => {
     }
   });
 })
-
+*******************************************/
+/*****************************************
 // общая функция закрытия попап
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupEsc) //чтобы перестал срабатывать когда окна закрыты
 }
-
+**********************************************/
 
 // ------------------------------------слушатели----------------------------------
 
@@ -226,7 +239,7 @@ newCardForm.addEventListener('submit', (evt) => {
   closePopup(newCardPopup); // закрытие попап место
 })
 
-document.querySelectorAll('.popup__close-btn').forEach(button => {
-  const buttonsPopup = button.closest('.popup'); // нашли родителя с нужным классом
-  button.addEventListener('click', () => closePopup(buttonsPopup)); // закрыли попап
-});
+// document.querySelectorAll('.popup__close-btn').forEach(button => {
+//   const buttonsPopup = button.closest('.popup'); // нашли родителя с нужным классом
+//   button.addEventListener('click', () => closePopup(buttonsPopup)); // закрыли попап
+// });
