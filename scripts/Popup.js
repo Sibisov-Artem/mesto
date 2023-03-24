@@ -10,12 +10,12 @@ export default class Popup {
   //публичные методы open и close, которые отвечают за открытие и закрытие попапа.
   open() {
     this._popup.classList.add('popup_opened');
-    this._popup.addEventListener('keydown', this._handleEscClose)
+    document.addEventListener('keydown', this._handleEscClose)
   }
 
   close() {
     this._popup.classList.remove('popup_opened');
-    this._popup.removeEventListener('keydown', this._handleEscClose)
+    document.removeEventListener('keydown', this._handleEscClose)
   }
 
   //приватный метод _handleEscClose, который содержит логику закрытия попапа клавишей Esc.

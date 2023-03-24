@@ -2,6 +2,8 @@ import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 import Section from "./Section.js";
 import PopupWithImage from "./PopupWithImage.js";
+import PopupWithForm from "./PopupWithForm.js";
+import UserInfo from "./UserInfo.js";
 
 
 
@@ -58,6 +60,16 @@ const editProfileButton = profile.querySelector('.profile__edit-btn');  //кно
 const profileForm = profilePopup.querySelector('.popup__form_profile'); //форма попап профиля
 const profileNameInput = profilePopup.querySelector('.popup__input_el_name'); //поле имени профиля
 const profileDescriptionInput = profilePopup.querySelector('.popup__input_el_description'); //поле описания профиля
+
+const profilePopupClass = new PopupWithForm('.popup_profile', (formData) => {
+  userInfo.setUserInfo(formData);
+  // profileName.textContent = profileNameInput.value;
+  // profileDescription.textContent = profileDescriptionInput.value;
+  // close(profilePopupClass);
+});
+profilePopupClass.setEventListeners();
+
+const userInfo = new UserInfo('.profile__name', '.profile__description');
 
 //---------------------------попап создания нвоой карточки------------------------
 const newCardPopup = document.querySelector('.popup_mesto'); //попап добавления места
@@ -165,11 +177,11 @@ function openPopup(popup) {
 *************************************************************/
 
 // функция открытия попап профиля
-function openProfilePopup() {
-  profileNameInput.value = profileName.textContent;
-  profileDescriptionInput.value = profileDescription.textContent;
-  openPopup(profilePopup);
-}
+// function openProfilePopup() {
+//   profileNameInput.value = profileName.textContent;
+//   profileDescriptionInput.value = profileDescription.textContent;
+//   openPopup(profilePopup);
+// }
 
 /*******************************************
 // функция для закрытия попап по нажатию на Escape
@@ -206,18 +218,21 @@ function closePopup(popup) {
 
 //слушатель открытия попап профиля по кнопке редактирования профиля
 editProfileButton.addEventListener('click', () => {
-  openProfilePopup();
+  profilePopupClass.open();
+  const userGetData = userInfo.getUserInfo();
+  profileNameInput.value = userGetData.name;
+  profileDescriptionInput.value = userGetData.info;
+
   profileValidator.resetValidation();
 }
 );
-
 //слушатель сохранения профиля
-profileForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  profileName.textContent = profileNameInput.value;
-  profileDescription.textContent = profileDescriptionInput.value;
-  closePopup(profilePopup);
-});
+// profileForm.addEventListener('submit', (evt) => {
+//   evt.preventDefault();
+//   profileName.textContent = profileNameInput.value;
+//   profileDescription.textContent = profileDescriptionInput.value;
+//   close(profilePopupClass);
+// });
 
 //слушатель открытия попап создания новой карточки по кнопке
 newCardButton.addEventListener('click', () => {
@@ -228,16 +243,16 @@ newCardButton.addEventListener('click', () => {
 });
 
 //добавляю слушатель на форму добавления карточки через submit
-newCardForm.addEventListener('submit', (evt) => {
-  evt.preventDefault(); // отменяем дефолтное поведение страницы (обновление) при нажатии на submit
-  const name = newCardTitleInput.value; // в переменную name ставим значение, которое будет введено в поле имени места
-  const link = newCardUrlInput.value; // в переменную link ставим значение, которое будет введено в поле ссылки на картинку
+// newCardForm.addEventListener('submit', (evt) => {
+//   evt.preventDefault(); // отменяем дефолтное поведение страницы (обновление) при нажатии на submit
+//   const name = newCardTitleInput.value; // в переменную name ставим значение, которое будет введено в поле имени места
+//   const link = newCardUrlInput.value; // в переменную link ставим значение, которое будет введено в поле ссылки на картинку
 
-  const card = createCard(name, link)
-  listForCards.prepend(card);
-  newCardValidator.resetValidation(); //чтоб кнопка задезейблилась и не успелось понаставиться картинок
-  closePopup(newCardPopup); // закрытие попап место
-})
+//   const card = createCard(name, link)
+//   listForCards.prepend(card);
+//   newCardValidator.resetValidation(); //чтоб кнопка задезейблилась и не успелось понаставиться картинок
+//   closePopup(newCardPopup); // закрытие попап место
+// })
 
 // document.querySelectorAll('.popup__close-btn').forEach(button => {
 //   const buttonsPopup = button.closest('.popup'); // нашли родителя с нужным классом
