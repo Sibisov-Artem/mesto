@@ -3,8 +3,6 @@ export default class UserInfo {
     this._nameProfileSelector = document.querySelector(nameProfileSelector);
     this._infoProfileSelector = document.querySelector(InfoProfileSelector);
 
-
-
   }
 
   //метод, который возвращает объект с данными пользователя.
@@ -29,11 +27,3 @@ export default class UserInfo {
   }
 
 }
-/*
-profileForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  profileName.textContent = profileNameInput.value;
-  profileDescription.textContent = profileDescriptionInput.value;
-  closePopup(profilePopup);
-});
-*/

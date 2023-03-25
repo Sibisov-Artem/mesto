@@ -4,7 +4,6 @@ export default class Popup {
     this._handleEscClose = this._handleEscClose.bind(this);
     this._popupCloseButton = this._popup.querySelector('.popup__close-btn');
 
-
   }
 
   //публичные методы open и close, которые отвечают за открытие и закрытие попапа.
@@ -25,10 +24,6 @@ export default class Popup {
     }
   }
 
-  //******************************************************************************************************
-
-  //*****************************************/*//***********/******************************** */
-
   // Закрытие попапа кликом на оверлей
   _closeOverlay(evt) {
 
@@ -37,24 +32,13 @@ export default class Popup {
     }
   }
 
-
-
-
-
   //публичный метод setEventListeners, который добавляет слушатель клика иконке закрытия попапа.
   // Модальное окно также закрывается при клике на затемнённую область вокруг формы.
-
-
   setEventListeners() {
     //слушатель клика иконки закрытия попапа.
 
     this._popupCloseButton.addEventListener('click', () => this.close()); // закрыли попап по кнопке закрытия
     this._popup.addEventListener('mousedown', this._closeOverlay.bind(this)); // закрыли попап через оверлей
-
-
-
-
-
   }
 
 }
