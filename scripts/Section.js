@@ -17,7 +17,7 @@ export default class Section {
 
   //У класса Section нет своей разметки. Он получает разметку через функцию-колбэк и вставляет её в контейнер.
   addItem(element) {
-    this._container.append(element);
+    this._container.prepend(element);
   }
 
 }
