@@ -61,8 +61,8 @@ const profileForm = profilePopup.querySelector('.popup__form_profile'); //фор
 const profileNameInput = profilePopup.querySelector('.popup__input_el_name'); //поле имени профиля
 const profileDescriptionInput = profilePopup.querySelector('.popup__input_el_description'); //поле описания профиля
 
-const profilePopupClass = new PopupWithForm('.popup_profile', (formData) => {
-  userInfo.setUserInfo(formData);
+const profilePopupClass = new PopupWithForm('.popup_profile', () => {
+  userInfo.setUserInfo('.popup__input_el_name', '.popup__input_el_description');
   // profileName.textContent = profileNameInput.value;
   // profileDescription.textContent = profileDescriptionInput.value;
   // close(profilePopupClass);
@@ -226,12 +226,12 @@ editProfileButton.addEventListener('click', () => {
   profileValidator.resetValidation();
 }
 );
-//слушатель сохранения профиля
+// // слушатель сохранения профиля
 // profileForm.addEventListener('submit', (evt) => {
 //   evt.preventDefault();
 //   profileName.textContent = profileNameInput.value;
 //   profileDescription.textContent = profileDescriptionInput.value;
-//   close(profilePopupClass);
+//   close(profilePopup);
 // });
 
 //слушатель открытия попап создания новой карточки по кнопке

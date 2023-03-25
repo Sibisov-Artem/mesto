@@ -11,6 +11,7 @@ export default class PopupWithForm extends Popup {
 
   //Содержит приватный метод _getInputValues, который собирает данные всех полей формы.
   _getInputValues() {
+    console.log('_getInputValues')
     // создаём пустой объект
     this._formValues = {};
     // добавляем в этот объект значения всех полей
@@ -27,16 +28,19 @@ export default class PopupWithForm extends Popup {
   setEventListeners() {
     super.setEventListeners();
     this._form.addEventListener('submit', (evt) => {
-      evt.preventDefault();
+      evt.preventDefault()
+      console.log('блин')
       this._handleFormSubmit(this._getInputValues());
+      this.close();
 
     })
   }
 
   //Перезаписываем родительский метод close, так как при закрытии попапа форма должна ещё и сбрасываться.
   close() {
+    console.log('PopupWithForm-in-close-correc. this._form.reset()??')
     super.close();
-    this._form.reset();
+    // this._form.reset();
 
   }
 

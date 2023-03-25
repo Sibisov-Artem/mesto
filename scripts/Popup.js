@@ -45,11 +45,11 @@ export default class Popup {
   // Модальное окно также закрывается при клике на затемнённую область вокруг формы.
 
 
-  setEventListeners = () => {
+  setEventListeners() {
     //слушатель клика иконки закрытия попапа.
 
-    this._popupCloseButton.addEventListener('click', () => this.close()); // закрыли попап
-    this._popup.addEventListener('mousedown', this._closeOverlay.bind(this));
+    this._popupCloseButton.addEventListener('click', () => this.close()); // закрыли попап по кнопке закрытия
+    this._popup.addEventListener('mousedown', this._closeOverlay.bind(this)); // закрыли попап через оверлей
 
 
 
