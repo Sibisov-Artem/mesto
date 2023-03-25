@@ -71,6 +71,14 @@ profilePopupClass.setEventListeners();
 
 const userInfo = new UserInfo('.profile__name', '.profile__description');
 
+
+const newCardPopupClass = new PopupWithForm('.popup_mesto', () => {
+  cardsList.addItem(createCard(newCardTitleInput.value, newCardUrlInput.value));
+});
+
+
+newCardPopupClass.setEventListeners();
+
 //---------------------------попап создания нвоой карточки------------------------
 const newCardPopup = document.querySelector('.popup_mesto'); //попап добавления места
 const newCardButton = profile.querySelector('.profile__add-btn'); //кнопка открытия попап добавления места
@@ -91,7 +99,7 @@ const previewPopup = new PopupWithImage('.popup_view'); //попап просм�
 
 previewPopup.setEventListeners();
 
-function openPreviewPopup (name, link) {
+function openPreviewPopup(name, link) {
   previewPopup.open(name, link);
 }
 //----------------создание карточки (экземпляр класса Card ) ---------------------
@@ -236,13 +244,13 @@ editProfileButton.addEventListener('click', () => {
 
 //слушатель открытия попап создания новой карточки по кнопке
 newCardButton.addEventListener('click', () => {
-  openPopup(newCardPopup);
+  newCardPopupClass.open();
   newCardTitleInput.value = ''; //чтобы очищалось поле при открывании
   newCardUrlInput.value = ''; //чтобы очищалось поле при открывании
   newCardValidator.resetValidation();
 });
 
-//добавляю слушатель на форму добавления карточки через submit
+// добавляю слушатель на форму добавления карточки через submit
 // newCardForm.addEventListener('submit', (evt) => {
 //   evt.preventDefault(); // отменяем дефолтное поведение страницы (обновление) при нажатии на submit
 //   const name = newCardTitleInput.value; // в переменную name ставим значение, которое будет введено в поле имени места
@@ -251,7 +259,6 @@ newCardButton.addEventListener('click', () => {
 //   const card = createCard(name, link)
 //   listForCards.prepend(card);
 //   newCardValidator.resetValidation(); //чтоб кнопка задезейблилась и не успелось понаставиться картинок
-//   closePopup(newCardPopup); // закрытие попап место
 // })
 
 // document.querySelectorAll('.popup__close-btn').forEach(button => {
