@@ -89,7 +89,7 @@ const newCardTitleInput = document.querySelector('.popup__input_el_mesto-title')
 const newCardUrlInput = document.querySelector('.popup__input_el_mesto-url'); //поле адреса картинки
 
 //---------------------------попап просмотра картинок-----------------------------
-const previewPopup = new PopupWithImage('.popup_view'); //попап просмотра картинки
+const handleCardClick = new PopupWithImage('.popup_view'); //попап просмотра картинки
 // const previewImage = document.querySelector('.popup__image'); // картинка просмотра
 // const imageCaption = document.querySelector('.popup__image-caption'); // описание к картинке
 
@@ -97,10 +97,10 @@ const previewPopup = new PopupWithImage('.popup_view'); //попап просм�
 
 // ----------------------------------функции--------------------------------------
 
-previewPopup.setEventListeners();
+handleCardClick.setEventListeners();
 
 function openPreviewPopup(name, link) {
-  previewPopup.open(name, link);
+  handleCardClick.open(name, link);
 }
 //----------------создание карточки (экземпляр класса Card ) ---------------------
 

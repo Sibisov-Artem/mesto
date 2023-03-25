@@ -1,9 +1,10 @@
 export default class Card {
-  constructor(name, link, templateSelector, openPreviewPopup) {
+  constructor(name, link, templateSelector, handleCardClick) {
     this._name = name;
     this._link = link;
-    this._openPreviewPopup = openPreviewPopup;
+    // this._openPreviewPopup = openPreviewPopup;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
 
   }
 
@@ -38,7 +39,7 @@ export default class Card {
 
     //просмотр картинки в попапе
     this._cardImage.addEventListener('click', () => {
-      this._openPreviewPopup(this._name, this._link)
+      this._handleCardClick(this._name, this._link)
     });
 
   }
