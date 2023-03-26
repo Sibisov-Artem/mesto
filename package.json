@@ -1,0 +1,30 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "По счету это **восьмая** проектная работа, после темы уроков по ознакомлению с Деструктуризацией кода и работы с Webpack'ом. **Основной упор проектной работы заключается в рефакторинге кода, создании дополнительных классов, использовании их в общем коде, а также в подключении Webpack'а и его настройки.**",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack serve"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.21.3",
+    "@babel/preset-env": "^7.20.2",
+    "autoprefixer": "^10.4.14",
+    "babel-loader": "^9.1.2",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.7.3",
+    "cssnano": "^5.1.15",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.7.5",
+    "postcss-loader": "^7.1.0",
+    "webpack": "^5.76.3",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.13.1"
+  },
+  "dependencies": {
+    "core-js": "^3.29.1"
+  }
+}
