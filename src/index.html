@@ -19,7 +19,9 @@
     <main class="content">
 
       <section class="profile section page__section">
-        <img class="profile__avatar" src="./images/profile__avatar.jpg" alt="аватарка">
+        <!-- Вставки вида <% %> — синтаксис шаблона lodash: -->
+        <img class="profile__avatar" src="<%=require('./images/profile__avatar.jpg')%>" alt="аватарка">
+
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <button class="profile__edit-btn hover" type="button"></button>

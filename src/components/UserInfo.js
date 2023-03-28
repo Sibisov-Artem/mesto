@@ -1,7 +1,7 @@
 export default class UserInfo {
-  constructor(nameProfileSelector, InfoProfileSelector) {
-    this._nameProfileSelector = document.querySelector(nameProfileSelector);
-    this._infoProfileSelector = document.querySelector(InfoProfileSelector);
+  constructor(nameSelector, infoSelector) {
+    this._userName = document.querySelector(nameSelector);
+    this._userInfo = document.querySelector(infoSelector);
 
   }
 
@@ -9,21 +9,19 @@ export default class UserInfo {
   // подставляет данные пользователя в форму при открытии.
   getUserInfo() {
     const formData = {
-      name: this._nameProfileSelector.textContent,
-      info: this._infoProfileSelector.textContent
+      name: this._userName.textContent,
+      info: this._userInfo.textContent
     }
-    console.log('getUserInfo in UserInfo correct')
     return formData;
 
   }
 
   //метод, который принимает новые данные пользователя и добавляет их на страницу.
   setUserInfo(profileNameInputSelector, profileDescriptionInputSelector) {
-    console.log('inputData in UserInfo not yet cor');
     const profileNameInput = document.querySelector(profileNameInputSelector);
     const profileDescriptionInput = document.querySelector(profileDescriptionInputSelector);
-    this._nameProfileSelector.textContent = profileNameInput.value;
-    this._infoProfileSelector.textContent = profileDescriptionInput.value;
+    this._userName.textContent = profileNameInput.value;
+    this._userInfo.textContent = profileDescriptionInput.value;
   }
 
 }
