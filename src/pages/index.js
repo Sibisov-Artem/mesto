@@ -22,16 +22,16 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 
 
-const profilePopupClass = new PopupWithForm('.popup_profile', () => {
-  userInfo.setUserInfo('.popup__input_el_name', '.popup__input_el_description');
+const profilePopupClass = new PopupWithForm('.popup_profile', (data) => {
+  userInfo.setUserInfo(data);
 });
 
 profilePopupClass.setEventListeners();
 
 const userInfo = new UserInfo('.profile__name', '.profile__description');
 
-const newCardPopupClass = new PopupWithForm('.popup_mesto', () => {
-  cardsList.addItem(createCard(newCardTitleInput.value, newCardUrlInput.value));
+const newCardPopupClass = new PopupWithForm('.popup_mesto', (item) => {
+  cardsList.addItem(createCard(item));
 });
 
 newCardPopupClass.setEventListeners();
@@ -47,11 +47,24 @@ function openPreviewPopup(name, link) {
 }
 //----------------создание карточки (экземпляр класса Card ) ---------------------
 
-function createCard(name, link) {
-  const card = new Card(name, link, '.card-template', openPreviewPopup);
+function createCard(data) {
+  const card = new Card(data, '.card-template', openPreviewPopup);
   const cardElement = card.createCard();
   return cardElement;
 }
+
+
+const cardsList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const card = createCard(item);
+    cardsList.addItem(card);
+
+  }
+}, listForCards
+);
+
+cardsList.renderItems();
 
 
 //---------------подключение валидации к форме профиля----------------------------
@@ -64,19 +77,6 @@ profileValidator.enableValidation();
 const newCardValidator = new FormValidator(formsConfig, newCardPopup);
 newCardValidator.enableValidation();
 //--------------------------------------------------------------------------------
-
-
-const cardsList = new Section({
-  items: initialCards,
-  renderer: (item) => {
-    const card = createCard(item.name, item.link);
-    cardsList.addItem(card);
-
-  }
-}, listForCards
-);
-
-cardsList.renderItems();
 
 
 // ------------------------------------слушатели----------------------------------

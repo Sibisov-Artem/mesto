@@ -17,11 +17,9 @@ export default class UserInfo {
   }
 
   //метод, который принимает новые данные пользователя и добавляет их на страницу.
-  setUserInfo(profileNameInputSelector, profileDescriptionInputSelector) {
-    const profileNameInput = document.querySelector(profileNameInputSelector);
-    const profileDescriptionInput = document.querySelector(profileDescriptionInputSelector);
-    this._userName.textContent = profileNameInput.value;
-    this._userInfo.textContent = profileDescriptionInput.value;
+  setUserInfo(data) {
+    this._userName.textContent = data.name;
+    this._userInfo.textContent = data.info;
   }
 
 }
