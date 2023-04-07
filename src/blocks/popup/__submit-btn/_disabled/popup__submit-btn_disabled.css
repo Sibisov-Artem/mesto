@@ -12,3 +12,12 @@
   border-radius: 2px;
   padding: 0;
 }
+
+@media screen and (max-width:611px) {
+  .popup__submit-btn_disabled {
+    height: 46px;
+    font-size: 14px;
+    line-height: 17px;
+    margin-top: 10px;
+  }
+}
