@@ -1,3 +1,47 @@
+
+
+// Загрузка информации о пользователе с сервера
+fetch('https://nomoreparties.co/v1/cohort-63/users/me', {
+  method: 'GET',
+  headers: {
+    authorization: 'a15016d5-ae9c-4339-845d-3268b7fcaab2'
+  }
+})
+  .then(res => res.json())
+  .then((result) => {
+    console.log(result);
+  });
+
+  // Загрузка карточек с сервера
+  fetch('https://mesto.nomoreparties.co/v1/cohort-63/cards', {
+    method: 'GET',
+    headers: {
+      authorization: 'a15016d5-ae9c-4339-845d-3268b7fcaab2'
+    }
+  })
+    .then(res => res.json())
+    .then((result) => {
+      console.log(result);
+    });
+
+    // Редактирование профиля
+    fetch('https://mesto.nomoreparties.co/v1/cohort-63/users/me', {
+  method: 'PATCH',
+  headers: {
+    authorization: 'a15016d5-ae9c-4339-845d-3268b7fcaab2',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    name: 'Marie Skłodowska Curie',
+    about: 'Physicist and Chemist'
+  })
+});
+
+
+
+
+
+
 import "./index.css";
 
 import {

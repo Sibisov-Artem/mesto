@@ -52,8 +52,8 @@
           <input class="popup__input popup__input_el_name" type="text" name="name" placeholder="Имя" required
             minlength="2" maxlength="40" id="profileName">
           <span class="popup__input-error profileName-error"></span>
-          <input class="popup__input popup__input_el_description" type="text" name="info"
-            placeholder="Профессия" required minlength="2" maxlength="200" id="profileDescription">
+          <input class="popup__input popup__input_el_description" type="text" name="info" placeholder="Профессия"
+            required minlength="2" maxlength="200" id="profileDescription">
           <span class="popup__input-error profileDescription-error"></span>
         </fieldset>
         <button class="popup__submit-btn" type="submit">Сохранить</button>
@@ -70,8 +70,8 @@
           <input class="popup__input popup__input_el_mesto-title" type="text" name="name" placeholder="Название"
             required minlength="2" maxlength="30" id="mestoTitle">
           <span class="popup__input-error mestoTitle-error"></span>
-          <input class="popup__input popup__input_el_mesto-url" type="url" name="link"
-            placeholder="Ссылка на картинку" required id="mestoUrlImage">
+          <input class="popup__input popup__input_el_mesto-url" type="url" name="link" placeholder="Ссылка на картинку"
+            required id="mestoUrlImage">
           <span class="popup__input-error mestoUrlImage-error"></span>
         </fieldset>
         <button class="popup__submit-btn" type="submit">Создать</button>
@@ -96,7 +96,11 @@
       <button class="place__wastebasket-btn hover" type="button"></button>
       <div class="place__info">
         <h2 class="place__title"></h2>
-        <button class="place__like-btn hover" type="button"></button>
+        <div class="place__like">
+          <button class="place__like-btn hover" type="button"></button>
+          <p class="place__like-count">111</p>
+        </div>
+
       </div>
     </li>
 
