@@ -19,8 +19,10 @@
     <main class="content">
 
       <section class="profile section page__section">
-        <!-- Вставки вида <% %> — синтаксис шаблона lodash: -->
-        <img class="profile__avatar" src="<%=require('./images/profile__avatar.jpg')%>" alt="аватарка">
+        <div class="profile__avatar-wrapper">
+          <!-- Вставки вида <% %> — синтаксис шаблона lodash: -->
+          <img class="profile__avatar" src="<%=require('./images/profile__avatar.jpg')%>" alt="аватарка">
+        </div>
 
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -89,12 +91,28 @@
 
   </div>
 
-  <div class="popup popup_confirmation-remove popup_opened ">
+  <div class="popup popup_confirmation-remove">
     <div class="popup__container">
       <button class="popup__close-btn hover" type="button"></button>
       <h2 class="popup__title">Вы уверены?</h2>
       <form class="popup__form popup__form_confirmation-remove" name="confirmationRemoveForm">
         <button class="popup__submit-btn" type="submit">Да</button>
+      </form>
+    </div>
+
+  </div>
+
+  <div class="popup popup_avatar">
+    <div class="popup__container">
+      <button class="popup__close-btn hover" type="button"></button>
+      <h2 class="popup__title">Обновить аватар</h2>
+      <form class="popup__form popup__form_avatar" name="avatar">
+        <fieldset class="popup__input-container">
+          <input class="popup__input popup__input_avatar-url" type="url" name="link" placeholder="Ссылка на картинку"
+            required id="avatarUrlImage">
+          <span class="popup__input-error mestoUrlImage-error"></span>
+        </fieldset>
+        <button class="popup__submit-btn" type="submit">Сохранить</button>
       </form>
     </div>
 
