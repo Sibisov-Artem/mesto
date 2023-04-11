@@ -1,47 +1,4 @@
 
-
-// Загрузка информации о пользователе с сервера
-// fetch('https://nomoreparties.co/v1/cohort-63/users/me', {
-//   method: 'GET',
-//   headers: {
-//     authorization: 'a15016d5-ae9c-4339-845d-3268b7fcaab2'
-//   }
-// })
-// .then(res => res.json())
-// .then((result) => {
-//   console.log(result);
-// });
-
-// // Загрузка карточек с сервера
-// fetch('https://mesto.nomoreparties.co/v1/cohort-63/cards', {
-//   method: 'GET',
-//   headers: {
-//     authorization: 'a15016d5-ae9c-4339-845d-3268b7fcaab2'
-//   }
-// })
-//   .then(res => res.json())
-//   .then((result) => {
-//     console.log(result);
-//   });
-
-// Редактирование профиля
-//     fetch('https://mesto.nomoreparties.co/v1/cohort-63/users/me', {
-//   method: 'PATCH',
-//   headers: {
-//     authorization: 'a15016d5-ae9c-4339-845d-3268b7fcaab2',
-//     'Content-Type': 'application/json'
-//   },
-//   body: JSON.stringify({
-//     name: 'Marie Skłodowska Curie',
-//     about: 'Physicist and Chemist'
-//   })
-// });
-
-
-
-
-
-
 import "./index.css";
 
 import {
@@ -67,37 +24,26 @@ import UserInfo from "../components/UserInfo.js";
 import { api } from "../components/Api.js"
 
 let userId = null;
-let cardsList = null;
+
 //первоначальная загрузка данных о пользователе с сервера
 //вникнуть, углубиться в процесс, как оно подтягивается...
-api.getUser()
-.then(data => {
-  userInfo.setUserInfo(data); console.log(data)})
 
-  api.getInitialCards()
-  .then((cards) => {
+//используем Promise.all чтобы дождаться выполнения обоих запросов)
+Promise.all([api.getUser(), api.getInitialCards()]).then(([data, cards]) => {
 
-   cardsList = new Section({
-    items: cards,
-    renderer: (item) => {
-      const card = createCard(item);
-      cardsList.addItem(card);
+  userInfo.setUserInfo(data); console.log(data);
 
-    }
-  }, listForCards
-  )
+  cards.forEach(
+    (item) => {
+      cardsList.addItem(createCard(item))
+    });
 
-  cardsList.renderItems();
-
-
-})
-
+  })
 
 //тут не то набарагозил, здесь нужно сделать обновление информации, а я сделал подтягивание инфо с сервера
 const profilePopupClass = new PopupWithForm('.popup_profile', (data) => {
   const profileSaveBtn = document.querySelector('.popup__save-btn');
   profileSaveBtn.textContent = 'Сохранение...';
-
   api.getUser(data)
     .then((data) => {
       userInfo.setUserInfo(data)
@@ -107,8 +53,6 @@ const profilePopupClass = new PopupWithForm('.popup_profile', (data) => {
     })
     .finally(() => profileSaveBtn.textContent = 'Сохранить')
 
-
-  // userInfo.setUserInfo(data);
 });
 
 profilePopupClass.setEventListeners();
@@ -120,7 +64,6 @@ const newCardPopupClass = new PopupWithForm('.popup_mesto', (item) => {
 });
 
 newCardPopupClass.setEventListeners();
-
 
 //---------------------------попап просмотра картинок-----------------------------
 const handleCardClick = new PopupWithImage('.popup_view'); //попап просмотра картинки
@@ -139,19 +82,18 @@ function createCard(data) {
   return cardElement;
 }
 
-// от предыдущего способа отображения первоначальных карточек нужно избавиться.
-// const cardsList = new Section({
-//   items: initialCards,
-//   renderer: (item) => {
-//     const card = createCard(item);
-//     cardsList.addItem(card);
+//убираем заготовленный список карточек initialCards и оставляем пустой массив объектов - items: []
+const cardsList = new Section({
+  items: [],
+  renderer: (item) => {
+    const card = createCard(item);
+    cardsList.addItem(card);
 
-//   }
-// }, listForCards
-// );
+  }
+}, listForCards
+);
 
-// cardsList.renderItems();
-
+cardsList.renderItems();
 
 //---------------подключение валидации к форме профиля----------------------------
 //----------------через создание экземпляра класса FormValidator------------------
@@ -163,7 +105,6 @@ profileValidator.enableValidation();
 const newCardValidator = new FormValidator(formsConfig, newCardPopup);
 newCardValidator.enableValidation();
 //--------------------------------------------------------------------------------
-
 
 // ------------------------------------слушатели----------------------------------
 
@@ -185,3 +126,5 @@ newCardButton.addEventListener('click', () => {
   newCardUrlInput.value = ''; //чтобы очищалось поле при открывании
   newCardValidator.resetValidation();
 });
+
+
