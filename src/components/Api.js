@@ -18,7 +18,7 @@ class Api {
       })
   }
 
-
+// запрос карточек
   getInitialCards() {
     return fetch(`${this.url}/cards`, {
       headers: this.headers
