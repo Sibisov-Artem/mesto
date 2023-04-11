@@ -31,13 +31,13 @@ class Api {
       })
   }
 
-  editUser() {  //методом PATCH
+  editUser(inputData) {  //методом PATCH
     return fetch(`${this.url}/users/me`, {
       method: 'PATCH',
       headers: this.headers,
       body: JSON.stringify({
-        name: 'Marie Skłodowska Curie',
-        about: 'Physicist and Chemist'
+        name: inputData.name,
+        about: inputData.info
       })
     })
       .then((res) => {

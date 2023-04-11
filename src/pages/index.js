@@ -36,22 +36,30 @@ Promise.all([api.getUser(), api.getInitialCards()]).then(([data, cards]) => {
   cards.forEach(
     (item) => {
       cardsList.addItem(createCard(item))
-    });
+    }); console.log(cards);
 
   })
 
 //тут не то набарагозил, здесь нужно сделать обновление информации, а я сделал подтягивание инфо с сервера
-const profilePopupClass = new PopupWithForm('.popup_profile', (data) => {
-  const profileSaveBtn = document.querySelector('.popup__save-btn');
-  profileSaveBtn.textContent = 'Сохранение...';
-  api.getUser(data)
+const profilePopupClass = new PopupWithForm('.popup_profile', (inputData) => {
+api.editUser(inputData)
+.then((data) => {
+  userInfo.setUserInfo(data)
+} )
+
+  // const profileSaveBtn = document.querySelector('.popup__save-btn');
+
+  // profileSaveBtn.textContent = 'Сохранение...';
+
+  /*                                api.getUser(data)
     .then((data) => {
       userInfo.setUserInfo(data)
     })
     .catch((err) => {
       console.log(err);
-    })
-    .finally(() => profileSaveBtn.textContent = 'Сохранить')
+    })                                          */
+
+    // .finally(() => profileSaveBtn.textContent = 'Сохранить')
 
 });
 
