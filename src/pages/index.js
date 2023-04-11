@@ -44,7 +44,7 @@ Promise.all([api.getUser(), api.getInitialCards()]).then(([data, cards]) => {
 const profilePopupClass = new PopupWithForm('.popup_profile', (inputData) => {
 api.editUser(inputData)
 .then((data) => {
-  userInfo.setUserInfo(data)
+  userInfo.setUserInfo(data);
 } )
 
   // const profileSaveBtn = document.querySelector('.popup__save-btn');
@@ -67,8 +67,13 @@ profilePopupClass.setEventListeners();
 
 const userInfo = new UserInfo('.profile__name', '.profile__description', '.profile__avatar');
 
-const newCardPopupClass = new PopupWithForm('.popup_mesto', (item) => {
-  cardsList.addItem(createCard(item));
+const newCardPopupClass = new PopupWithForm('.popup_mesto', (inputData) => {
+api.addNewCard(inputData)
+.then((data) => {
+  cardsList.addItem(createCard(data));
+})
+
+  // cardsList.addItem(createCard(item));
 });
 
 newCardPopupClass.setEventListeners();

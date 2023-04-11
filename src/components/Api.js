@@ -46,10 +46,24 @@ class Api {
         }
         return Promise.reject(`Что-то пошло не так: ${res.status}`);
       })
-
   }
 
-
+  addNewCard(inputData) {    //методом POST
+    return fetch(`${this.url}/cards`, {
+      method: 'POST',
+      headers: this.headers,
+      body: JSON.stringify({
+        name: inputData.name,
+        link: inputData.link
+      })
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Что-то пошло не так: ${res.status}`);
+      })
+  }
 
 
 }
