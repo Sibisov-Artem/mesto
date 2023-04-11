@@ -1,12 +1,15 @@
 export default class Card {
-  constructor(data, templateSelector, openPreviewPopup, openConfirmationRemove) {
+  constructor(data, templateSelector, openPreviewPopup, openConfirmationRemove, userId) {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
     this._templateSelector = templateSelector;
     this._openPreviewPopup = openPreviewPopup; // для просмотра картинки
     this._openConfirmationRemove = openConfirmationRemove;  // для попапа подтверждения удаления картинки
-
+    this._userId = userId; //_id пользователя
+    this._ownerId = data.owner._id; //id разместивего карточку, владелец карточки
+    this._element = this._getTemplate();
+    this._wastebasketButton = this._element.querySelector('.place__wastebasket-btn');
   }
 
   //создание копии template
@@ -25,9 +28,18 @@ export default class Card {
     this._likeButton.classList.toggle('place__like-btn_active');
   }
 
+  _checkWastebasketButton = () => {
+    if (this._userId === this._ownerId) {
+      this._wastebasketButton.remove()
+    }
+     console.log(this._userId);
+     console.log(this._ownerId);
+
+  }
+
   _setEventListeners = () => {
     // для подтверждения удаления картинки
-    this._wastebasketButton = this._element.querySelector('.place__wastebasket-btn');
+    // this._wastebasketButton = this._element.querySelector('.place__wastebasket-btn');
     this._wastebasketButton.addEventListener('click', () => {
       this._openConfirmationRemove();
     });
@@ -48,7 +60,7 @@ export default class Card {
   //создаем и заполняем карточку
   createCard() {
     // Запишем разметку в приватное поле _element. Для доступа элементов к ней.
-    this._element = this._getTemplate();
+    // this._element = this._getTemplate();
 
     // Добавим данные
 
@@ -61,6 +73,10 @@ export default class Card {
     //счетчик лайков
     this._likeCount = this._element.querySelector(".place__like-count");
     this._likeCount.textContent = this._likes.length;
+    this._checkWastebasketButton();
+    // if (this._userId !== this._ownerId) {
+    //   this._wastebasketButton.remove();
+    // }
 
     this._setEventListeners();
 

@@ -26,6 +26,7 @@ import { api } from "../components/Api.js"
 
 let userId = null;
 
+
 //первоначальная загрузка данных о пользователе с сервера
 //вникнуть, углубиться в процесс, как оно подтягивается...
 
@@ -33,7 +34,7 @@ let userId = null;
 Promise.all([api.getUser(), api.getInitialCards()]).then(([data, cards]) => {
 
   userInfo.setUserInfo(data); console.log(data);
-
+  userId = data._id;
   cards.forEach(
     (item) => {
       cardsList.addItem(createCard(item))
@@ -87,6 +88,7 @@ const newCardPopupClass = new PopupWithForm('.popup_mesto', (inputData) => {
 });
 newCardPopupClass.setEventListeners();
 
+
 //---------------------- попап подтверждения удаления карточки --------------//
 
 const confirmRemovePopup = new PopupConfirmationRemove('.popup_confirmation-remove');
@@ -112,8 +114,10 @@ function openPreviewPopup(name, link) {
 //id пользователя затолкать в Card для определения своих карт от не своих
 
 function createCard(data) {
-  const card = new Card(data, '.card-template', openPreviewPopup, openConfirmationRemove);
+  const card = new Card(data, '.card-template', openPreviewPopup, openConfirmationRemove, userId);
   const cardElement = card.createCard();
+  // console.log(userId);
+  // console.log(data.owner._id);
   return cardElement;
 }
 

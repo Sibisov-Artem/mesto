@@ -18,7 +18,7 @@ class Api {
       })
   }
 
-// запрос карточек
+  // запрос карточек
   getInitialCards() {
     return fetch(`${this.url}/cards`, {
       headers: this.headers
@@ -56,6 +56,19 @@ class Api {
         name: inputData.name,
         link: inputData.link
       })
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Что-то пошло не так: ${res.status}`);
+      })
+  }
+
+  deleteCard(cardId) {
+    return fetch(`${this.url}/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers
     })
       .then((res) => {
         if (res.ok) {

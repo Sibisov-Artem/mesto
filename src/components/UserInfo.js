@@ -12,7 +12,9 @@ export default class UserInfo {
   getUserInfo() {
     const formData = {
       name: this._userName.textContent,
-      info: this._userInfo.textContent
+      info: this._userInfo.textContent,
+      _id: this._userId,
+
     }
     return formData;
 
@@ -24,7 +26,10 @@ export default class UserInfo {
     this._userInfo.textContent = data.about;
     this._userAvatar.src = data.avatar;
     this._userId = data._id;
+    console.log(this._userId);
+    console.log(data._id);
 
   }
+
 
 }
