@@ -20,6 +20,7 @@ import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import PopupConfirmationRemove from "../components/PopupConfirmationRemove.js";
 import UserInfo from "../components/UserInfo.js";
 import { api } from "../components/Api.js"
 
@@ -28,7 +29,7 @@ let userId = null;
 //первоначальная загрузка данных о пользователе с сервера
 //вникнуть, углубиться в процесс, как оно подтягивается...
 
-//используем Promise.all чтобы дождаться выполнения обоих запросов)
+//используем Promise.all чтобы дождаться выполнения обоих запросов - getUser и getInitialCards )
 Promise.all([api.getUser(), api.getInitialCards()]).then(([data, cards]) => {
 
   userInfo.setUserInfo(data); console.log(data);
@@ -38,14 +39,22 @@ Promise.all([api.getUser(), api.getInitialCards()]).then(([data, cards]) => {
       cardsList.addItem(createCard(item))
     }); console.log(cards);
 
-  })
+})
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
 
-//тут не то набарагозил, здесь нужно сделать обновление информации, а я сделал подтягивание инфо с сервера
+
+// попап профиля - форма профиля - редактирование профиля с редактированием на сервер
+// и отображением на странице в разделе профиля
 const profilePopupClass = new PopupWithForm('.popup_profile', (inputData) => {
-api.editUser(inputData)
-.then((data) => {
-  userInfo.setUserInfo(data);
-} )
+  api.editUser(inputData)
+    .then((data) => {
+      userInfo.setUserInfo(data);
+    })
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    });
 
   // const profileSaveBtn = document.querySelector('.popup__save-btn');
 
@@ -59,38 +68,51 @@ api.editUser(inputData)
       console.log(err);
     })                                          */
 
-    // .finally(() => profileSaveBtn.textContent = 'Сохранить')
+  // .finally(() => profileSaveBtn.textContent = 'Сохранить')
 
 });
 
-profilePopupClass.setEventListeners();
+profilePopupClass.setEventListeners(); // вешаем обработчики (закрытия попапа, preventDefault, сброс формы при закрытии)
 
 const userInfo = new UserInfo('.profile__name', '.profile__description', '.profile__avatar');
 
 const newCardPopupClass = new PopupWithForm('.popup_mesto', (inputData) => {
-api.addNewCard(inputData)
-.then((data) => {
-  cardsList.addItem(createCard(data));
-})
-
-  // cardsList.addItem(createCard(item));
+  api.addNewCard(inputData)
+    .then((data) => {
+      cardsList.addItem(createCard(data));
+    })
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    });
 });
-
 newCardPopupClass.setEventListeners();
 
-//---------------------------попап просмотра картинок-----------------------------
-const handleCardClick = new PopupWithImage('.popup_view'); //попап просмотра картинки
+//---------------------- попап подтверждения удаления карточки --------------//
 
-handleCardClick.setEventListeners();
+const confirmRemovePopup = new PopupConfirmationRemove('.popup_confirmation-remove');
+confirmRemovePopup.setEventListeners();
+
+function openConfirmationRemove() {
+  confirmRemovePopup.open();
+}
+
+
+//---------------------------попап просмотра картинок-----------------------------
+const popupWithImage = new PopupWithImage('.popup_view'); //попап просмотра картинки
+
+popupWithImage.setEventListeners();
 
 function openPreviewPopup(name, link) {
-  handleCardClick.open(name, link);
+  popupWithImage.open(name, link);
 }
+
+//-------------
+
 //----------------создание карточки (экземпляр класса Card в сочетании с api ) ---------------------
 //id пользователя затолкать в Card для определения своих карт от не своих
 
 function createCard(data) {
-  const card = new Card(data, '.card-template', openPreviewPopup);
+  const card = new Card(data, '.card-template', openPreviewPopup, openConfirmationRemove);
   const cardElement = card.createCard();
   return cardElement;
 }

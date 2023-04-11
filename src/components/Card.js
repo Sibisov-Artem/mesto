@@ -1,11 +1,11 @@
 export default class Card {
-  constructor(data, templateSelector, handleCardClick) {
+  constructor(data, templateSelector, openPreviewPopup, openConfirmationRemove) {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
-    // this._openPreviewPopup = openPreviewPopup;
     this._templateSelector = templateSelector;
-    this._handleCardClick = handleCardClick;
+    this._openPreviewPopup = openPreviewPopup; // для просмотра картинки
+    this._openConfirmationRemove = openConfirmationRemove;  // для попапа подтверждения удаления картинки
 
   }
 
@@ -15,8 +15,7 @@ export default class Card {
     return cardElement;
   }
 
-  //функция удаления по клику по корзинке через target и closest для createCard
-  _deleteClick() {
+  _deleteCard() {
     this._element.remove();
     this._element = null;
   }
@@ -27,20 +26,21 @@ export default class Card {
   }
 
   _setEventListeners = () => {
-    //удаление картинки по клику на корзинку
-    this._element.querySelector('.place__wastebasket-btn').addEventListener('click', () => {
-      this._deleteClick()
+    // для подтверждения удаления картинки
+    this._wastebasketButton = this._element.querySelector('.place__wastebasket-btn');
+    this._wastebasketButton.addEventListener('click', () => {
+      this._openConfirmationRemove();
     });
 
     //переключатель лайков
     this._likeButton = this._element.querySelector('.place__like-btn');
     this._likeButton.addEventListener('click', () => {
-      this._likeClick()
+      this._likeClick();
     }); //переключатель лайков
 
     //просмотр картинки в попапе
     this._cardImage.addEventListener('click', () => {
-      this._handleCardClick(this._name, this._link)
+      this._openPreviewPopup(this._name, this._link)
     });
 
   }
