@@ -1,19 +1,63 @@
 class Api {
   constructor(options) {
-    // тело конструктора
+    this.url = options.baseUrl;
+    this.headers = options.headers;
+
   }
+
+  // метод получения информации о пользователе с сервера
+  getUser() {
+    return fetch(`${this.url}/users/me`, {
+      headers: this.headers
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Что-то пошло не так: ${res.status}`);
+      })
+  }
+
 
   getInitialCards() {
-    // ...
+    return fetch(`${this.url}/cards`, {
+      headers: this.headers
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Что-то пошло не так: ${res.status}`);
+      })
   }
 
-  // другие методы работы с API
+  editUser() {  //методом PATCH
+    return fetch(`${this.url}/users/me`, {
+      method: 'PATCH',
+      headers: this.headers,
+      body: JSON.stringify({
+        name: 'Marie Skłodowska Curie',
+        about: 'Physicist and Chemist'
+      })
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Что-то пошло не так: ${res.status}`);
+      })
+
+  }
+
+
+
+
 }
 
-const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-42',
+export const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-63', //моя группа, откуда всё будет браться после / ()
   headers: {
-    authorization: 'c56e30dc-2883-4270-a59e-b2f7bae969c6',
+    authorization: 'a15016d5-ae9c-4339-845d-3268b7fcaab2', //мой токен
     'Content-Type': 'application/json'
   }
 });

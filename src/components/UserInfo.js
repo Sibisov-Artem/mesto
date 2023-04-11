@@ -1,12 +1,14 @@
 export default class UserInfo {
-  constructor(nameSelector, infoSelector) {
+  constructor(nameSelector, infoSelector, avatarSelector, userId) {
     this._userName = document.querySelector(nameSelector);
     this._userInfo = document.querySelector(infoSelector);
+    this._userAvatar = document.querySelector(avatarSelector);
+    this._userId = userId;
 
   }
 
   //метод, который возвращает объект с данными пользователя.
-  // подставляет данные пользователя в форму при открытии.
+  // собирает информацию из профиля и подставляет данные пользователя в форму при открытии.
   getUserInfo() {
     const formData = {
       name: this._userName.textContent,
@@ -16,10 +18,13 @@ export default class UserInfo {
 
   }
 
-  //метод, который принимает новые данные пользователя и добавляет их на страницу.
+  //метод, который принимает новые данные пользователя из формы и добавляет их на страницу в профиль.
   setUserInfo(data) {
     this._userName.textContent = data.name;
-    this._userInfo.textContent = data.info;
+    this._userInfo.textContent = data.about;
+    this._userAvatar.src = data.avatar;
+    this._userId = data._id;
+
   }
 
 }

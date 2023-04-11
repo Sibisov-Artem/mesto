@@ -14,7 +14,6 @@ export {
   newCardForm,
   newCardTitleInput,
   newCardUrlInput,
-
 }
 
 //набор карточек для отображения
@@ -70,6 +69,7 @@ const editProfileButton = profile.querySelector('.profile__edit-btn');  //кно
 const profileForm = profilePopup.querySelector('.popup__form_profile'); //форма попап профиля
 const profileNameInput = profilePopup.querySelector('.popup__input_el_name'); //поле имени профиля
 const profileDescriptionInput = profilePopup.querySelector('.popup__input_el_description'); //поле описания профиля
+
 
 //---------------------------попап создания нвоой карточки------------------------
 const newCardPopup = document.querySelector('.popup_mesto'); //попап добавления места
