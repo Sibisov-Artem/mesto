@@ -26,8 +26,8 @@ export default class UserInfo {
     this._userInfo.textContent = data.about;
     this._userAvatar.src = data.avatar;
     this._userId = data._id;
-    console.log(this._userId);
-    console.log(data._id);
+    // console.log(this._userId);
+    // console.log(data._id);
 
   }
 

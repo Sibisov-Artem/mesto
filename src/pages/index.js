@@ -33,12 +33,14 @@ let userId = null;
 //используем Promise.all чтобы дождаться выполнения обоих запросов - getUser и getInitialCards )
 Promise.all([api.getUser(), api.getInitialCards()]).then(([data, cards]) => {
 
-  userInfo.setUserInfo(data); console.log(data);
+  userInfo.setUserInfo(data);
+  //  console.log(data);
   userId = data._id;
   cards.forEach(
     (item) => {
       cardsList.addItem(createCard(item))
-    }); console.log(cards);
+    });
+  //  console.log(cards);
 
 })
   .catch((err) => {
@@ -91,7 +93,17 @@ newCardPopupClass.setEventListeners();
 
 //---------------------- попап подтверждения удаления карточки --------------//
 
-const confirmRemovePopup = new PopupConfirmationRemove('.popup_confirmation-remove');
+const confirmRemovePopup = new PopupConfirmationRemove('.popup_confirmation-remove', (removeCard, cardId) => {
+  api.deleteCard(cardId, removeCard)
+    .then(() => {
+      // console.log(removeCard);
+      removeCard.deleteCard();
+    })
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    });
+});
+
 confirmRemovePopup.setEventListeners();
 
 function openConfirmationRemove() {
@@ -114,7 +126,7 @@ function openPreviewPopup(name, link) {
 //id пользователя затолкать в Card для определения своих карт от не своих
 
 function createCard(data) {
-  const card = new Card(data, '.card-template', openPreviewPopup, openConfirmationRemove, userId);
+  const card = new Card(data, '.card-template', openPreviewPopup, userId, (cardId, element) => confirmRemovePopup.open(element, cardId));
   const cardElement = card.createCard();
   // console.log(userId);
   // console.log(data.owner._id);

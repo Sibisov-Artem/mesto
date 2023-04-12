@@ -1,13 +1,14 @@
 export default class Card {
-  constructor(data, templateSelector, openPreviewPopup, openConfirmationRemove, userId) {
+  constructor(data, templateSelector, openPreviewPopup, userId, openConfirmationRemove) {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
+    this._ownerId = data.owner._id; //id разместивего карточку, владелец карточки
+    this._cardId = data._id; //id карточки
     this._templateSelector = templateSelector;
     this._openPreviewPopup = openPreviewPopup; // для просмотра картинки
     this._openConfirmationRemove = openConfirmationRemove;  // для попапа подтверждения удаления картинки
     this._userId = userId; //_id пользователя
-    this._ownerId = data.owner._id; //id разместивего карточку, владелец карточки
     this._element = this._getTemplate();
     this._wastebasketButton = this._element.querySelector('.place__wastebasket-btn');
   }
@@ -18,9 +19,12 @@ export default class Card {
     return cardElement;
   }
 
-  _deleteCard() {
+  getCardId() {
+    return this._cardId;
+  }
+
+  deleteCard() {
     this._element.remove();
-    this._element = null;
   }
 
   // функция переключателя лайков на карточки для createCard
@@ -29,11 +33,11 @@ export default class Card {
   }
 
   _checkWastebasketButton = () => {
-    if (this._userId === this._ownerId) {
+    if (this._userId !== this._ownerId) {
       this._wastebasketButton.remove()
     }
-     console.log(this._userId);
-     console.log(this._ownerId);
+    //  console.log(this._userId);
+    //  console.log(this._ownerId);
 
   }
 
@@ -41,7 +45,7 @@ export default class Card {
     // для подтверждения удаления картинки
     // this._wastebasketButton = this._element.querySelector('.place__wastebasket-btn');
     this._wastebasketButton.addEventListener('click', () => {
-      this._openConfirmationRemove();
+      this._openConfirmationRemove(this._cardId, this);
     });
 
     //переключатель лайков
@@ -59,10 +63,6 @@ export default class Card {
 
   //создаем и заполняем карточку
   createCard() {
-    // Запишем разметку в приватное поле _element. Для доступа элементов к ней.
-    // this._element = this._getTemplate();
-
-    // Добавим данные
 
     this._element.querySelector('.place__title').textContent = this._name; // название картинки (title)
 
@@ -74,9 +74,6 @@ export default class Card {
     this._likeCount = this._element.querySelector(".place__like-count");
     this._likeCount.textContent = this._likes.length;
     this._checkWastebasketButton();
-    // if (this._userId !== this._ownerId) {
-    //   this._wastebasketButton.remove();
-    // }
 
     this._setEventListeners();
 
