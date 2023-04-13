@@ -28,10 +28,6 @@ import { api } from "../components/Api.js"
 
 let userId = null;
 
-
-//первоначальная загрузка данных о пользователе с сервера
-//вникнуть, углубиться в процесс, как оно подтягивается...
-
 //используем Promise.all чтобы дождаться выполнения обоих запросов - getUser и getInitialCards )
 Promise.all([api.getUser(), api.getInitialCards()]).then(([data, cards]) => {
 
@@ -118,8 +114,7 @@ function openPreviewPopup(name, link) {
 }
 
 
-//----------------создание карточки (экземпляр класса Card в сочетании с api ) ---------------------
-//id пользователя затолкать в Card для определения своих карт от не своих
+//----------------создание карточки (экземпляр класса Card в сочетании с лайк/оффлайк ) ---------------------
 
 function createCard(data) {
   const card = new Card(data, '.card-template', openPreviewPopup, userId,
