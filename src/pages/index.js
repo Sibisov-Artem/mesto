@@ -13,6 +13,8 @@ import {
   listForCards,
   newCardTitleInput,
   newCardUrlInput,
+  editAvatarButton,
+  changeAvatarPopup,
 } from "../components/constants.js"
 
 import Card from "../components/Card.js";
@@ -36,6 +38,7 @@ Promise.all([api.getUser(), api.getInitialCards()]).then(([data, cards]) => {
   userInfo.setUserInfo(data);
   //  console.log(data);
   userId = data._id;
+  console.log(data);
   cards.forEach(
     (item) => {
       cardsList.addItem(createCard(item))
@@ -54,6 +57,7 @@ const profilePopupClass = new PopupWithForm('.popup_profile', (inputData) => {
   api.editUser(inputData)
     .then((data) => {
       userInfo.setUserInfo(data);
+      console.log(data)
     })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
@@ -90,7 +94,20 @@ const newCardPopupClass = new PopupWithForm('.popup_mesto', (inputData) => {
 });
 newCardPopupClass.setEventListeners();
 
+//------------------------попап изменения аватара----------------------------//
 
+const changeAvatarPopupClass = new PopupWithForm('.popup_avatar', (inputData) => {
+  api.changeAvatar(inputData)
+    .then((data) => {
+      userInfo.setUserInfo(data);
+      console.log(data)
+      console.log(inputData)
+    })
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    });
+});
+changeAvatarPopupClass.setEventListeners();
 //---------------------- попап подтверждения удаления карточки --------------//
 
 const confirmRemovePopup = new PopupConfirmationRemove('.popup_confirmation-remove', (removeCard, cardId) => {
@@ -106,9 +123,6 @@ const confirmRemovePopup = new PopupConfirmationRemove('.popup_confirmation-remo
 
 confirmRemovePopup.setEventListeners();
 
-function openConfirmationRemove() {
-  confirmRemovePopup.open();
-}
 
 
 //---------------------------попап просмотра картинок-----------------------------
@@ -139,16 +153,16 @@ function createCard(data) {
     },
     (cardId) => {
       api.deleteLikeCard(cardId)
-      .then(data => {
-        card.likeClick(data);
-      })
-      .catch((err) => {
-        console.log(err); // выведем ошибку в консоль
-      });
+        .then(data => {
+          card.likeClick(data);
+        })
+        .catch((err) => {
+          console.log(err); // выведем ошибку в консоль
+        });
     }
 
 
-    );
+  );
   const cardElement = card.createCard();
   // console.log(userId);
   // console.log(data.owner._id);
@@ -179,6 +193,10 @@ const newCardValidator = new FormValidator(formsConfig, newCardPopup);
 newCardValidator.enableValidation();
 //--------------------------------------------------------------------------------
 
+//-------------подключение валидации к форме создания новой карточки--------------
+const avatarValidator = new FormValidator(formsConfig, changeAvatarPopup);
+avatarValidator.enableValidation();
+
 // ------------------------------------слушатели----------------------------------
 
 //слушатель открытия попап профиля по кнопке редактирования профиля
@@ -192,11 +210,17 @@ editProfileButton.addEventListener('click', () => {
 }
 );
 
+//слушатель открытия попапа изменения аватара профиля
+editAvatarButton.addEventListener('click', () => {
+  changeAvatarPopupClass.open();
+  avatarValidator.resetValidation();
+});
+
 //слушатель открытия попап создания новой карточки по кнопке
 newCardButton.addEventListener('click', () => {
   newCardPopupClass.open();
-  newCardTitleInput.value = ''; //чтобы очищалось поле при открывании
-  newCardUrlInput.value = ''; //чтобы очищалось поле при открывании
+  // newCardTitleInput.value = ''; //чтобы очищалось поле при открывании
+  // newCardUrlInput.value = ''; //чтобы очищалось поле при открывании
   newCardValidator.resetValidation();
 });
 

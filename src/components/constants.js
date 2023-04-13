@@ -14,6 +14,8 @@ export {
   newCardForm,
   newCardTitleInput,
   newCardUrlInput,
+  editAvatarButton,
+  changeAvatarPopup,
 }
 
 //набор карточек для отображения
@@ -79,3 +81,6 @@ const listForCards = document.querySelector('.place__grid'); // список, в
 const newCardForm = document.querySelector('.popup__form_mesto'); //форма попап добавления места
 const newCardTitleInput = document.querySelector('.popup__input_el_mesto-title'); //поле имени места
 const newCardUrlInput = document.querySelector('.popup__input_el_mesto-url'); //поле адреса картинки
+
+const changeAvatarPopup = document.querySelector('.popup_avatar'); //попап изменения аватара
+const editAvatarButton = document.querySelector('.profile__avatar-wrapper'); //кнопка открытия попапа редактирования аватара
