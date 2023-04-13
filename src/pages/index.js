@@ -136,7 +136,19 @@ function createCard(data) {
         .catch((err) => {
           console.log(err); // выведем ошибку в консоль
         });
-    });
+    },
+    (cardId) => {
+      api.deleteLikeCard(cardId)
+      .then(data => {
+        card.likeClick(data);
+      })
+      .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+      });
+    }
+
+
+    );
   const cardElement = card.createCard();
   // console.log(userId);
   // console.log(data.owner._id);

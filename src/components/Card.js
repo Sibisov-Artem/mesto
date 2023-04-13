@@ -1,9 +1,10 @@
 export default class Card {
-  constructor(data, templateSelector, openPreviewPopup, userId, openConfirmationRemove, likeCard) {
+  constructor(data, templateSelector, openPreviewPopup, userId, openConfirmationRemove, likeCard, deleteLikeCard) {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;  // лайки с сервера для получения длины массива лайков - колва
     this._likeCard = likeCard;
+    this._deleteLikeCard = deleteLikeCard;
     this._ownerId = data.owner._id; //id разместившего карточку, владелец картинки
     this._cardId = data._id; //id карточки
     this._templateSelector = templateSelector;
@@ -54,7 +55,13 @@ export default class Card {
     //переключатель лайков
     this._likeButton = this._element.querySelector('.place__like-btn');
     this._likeButton.addEventListener('click', () => {
-      this._likeCard(this._cardId);
+      if (this._likes.some((like) => like._id === this._userId)) {
+        this._deleteLikeCard(this._cardId);
+      } else {
+        this._likeCard(this._cardId);
+      }
+
+
     }); //переключатель лайков
 
     //просмотр картинки в попапе
