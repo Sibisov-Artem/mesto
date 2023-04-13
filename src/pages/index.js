@@ -120,7 +120,7 @@ function createCard(data) {
   const card = new Card(data, '.card-template', openPreviewPopup, userId,
     (cardId, element) => confirmRemovePopup.open(element, cardId),
     (cardId) => {
-      api.likeCard(cardId)
+      api.addLike(cardId)
         .then((data) => {
           card.likeClickCount(data);
         })
@@ -129,7 +129,7 @@ function createCard(data) {
         });
     },
     (cardId) => {
-      api.deleteLikeCard(cardId)
+      api.deleteLike(cardId)
         .then(data => {
           card.likeClickCount(data);
         })
