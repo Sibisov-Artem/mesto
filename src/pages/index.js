@@ -40,7 +40,7 @@ Promise.all([api.getUser(), api.getInitialCards()]).then(([data, cards]) => {
     (item) => {
       cardsList.addItem(createCard(item))
     });
-  //  console.log(cards);
+  console.log(cards);
 
 })
   .catch((err) => {
@@ -126,7 +126,17 @@ function openPreviewPopup(name, link) {
 //id пользователя затолкать в Card для определения своих карт от не своих
 
 function createCard(data) {
-  const card = new Card(data, '.card-template', openPreviewPopup, userId, (cardId, element) => confirmRemovePopup.open(element, cardId));
+  const card = new Card(data, '.card-template', openPreviewPopup, userId,
+    (cardId, element) => confirmRemovePopup.open(element, cardId),
+    (cardId) => {
+      api.likeCard(cardId)
+        .then((data) => {
+          card.likeClick(data);
+        })
+        .catch((err) => {
+          console.log(err); // выведем ошибку в консоль
+        });
+    });
   const cardElement = card.createCard();
   // console.log(userId);
   // console.log(data.owner._id);

@@ -1,15 +1,16 @@
 export default class Card {
-  constructor(data, templateSelector, openPreviewPopup, userId, openConfirmationRemove) {
+  constructor(data, templateSelector, openPreviewPopup, userId, openConfirmationRemove, likeCard) {
     this._name = data.name;
     this._link = data.link;
-    this._likes = data.likes;
-    this._ownerId = data.owner._id; //id разместивего карточку, владелец карточки
+    this._likes = data.likes;  // лайки с сервера для получения длины массива лайков - колва
+    this._likeCard = likeCard;
+    this._ownerId = data.owner._id; //id разместившего карточку, владелец картинки
     this._cardId = data._id; //id карточки
     this._templateSelector = templateSelector;
     this._openPreviewPopup = openPreviewPopup; // для просмотра картинки
-    this._openConfirmationRemove = openConfirmationRemove;  // для попапа подтверждения удаления картинки
+    this._openConfirmationRemove = openConfirmationRemove;  // для попапа подтверждения удаления карточки
     this._userId = userId; //_id пользователя
-    this._element = this._getTemplate();
+    this._element = this._getTemplate();  //карточка
     this._wastebasketButton = this._element.querySelector('.place__wastebasket-btn');
   }
 
@@ -19,17 +20,19 @@ export default class Card {
     return cardElement;
   }
 
-  getCardId() {
-    return this._cardId;
-  }
+  // getCardId() {
+  //   return this._cardId;
+  // } //так и не пригодилось
 
   deleteCard() {
     this._element.remove();
   }
 
   // функция переключателя лайков на карточки для createCard
-  _likeClick() {
+  likeClick(data) {
     this._likeButton.classList.toggle('place__like-btn_active');
+    this._likes = data.likes;
+    this._likeCount.textContent = this._likes.length;
   }
 
   _checkWastebasketButton = () => {
@@ -51,7 +54,7 @@ export default class Card {
     //переключатель лайков
     this._likeButton = this._element.querySelector('.place__like-btn');
     this._likeButton.addEventListener('click', () => {
-      this._likeClick();
+      this._likeCard(this._cardId);
     }); //переключатель лайков
 
     //просмотр картинки в попапе
@@ -72,7 +75,7 @@ export default class Card {
 
     //счетчик лайков
     this._likeCount = this._element.querySelector(".place__like-count");
-    this._likeCount.textContent = this._likes.length;
+    this._likeCount.textContent = this._likes.length; //кол-во лайков ставится из данных с сервера- по длине массива лайков
     this._checkWastebasketButton();
 
     this._setEventListeners();
