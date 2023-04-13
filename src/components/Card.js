@@ -21,10 +21,6 @@ export default class Card {
     return cardElement;
   }
 
-  // getCardId() {
-  //   return this._cardId;
-  // } //так и не пригодилось
-
   deleteCard() {
     this._element.remove();
   }
@@ -40,8 +36,6 @@ export default class Card {
     if (this._userId !== this._ownerId) {
       this._wastebasketButton.remove()
     }
-    //  console.log(this._userId);
-    //  console.log(this._ownerId);
 
   }
 
@@ -60,22 +54,17 @@ export default class Card {
       } else {
         this._likeCard(this._cardId);
       }
-
-
-    }); //переключатель лайков
+    });
 
     //просмотр картинки в попапе
     this._cardImage.addEventListener('click', () => {
       this._openPreviewPopup(this._name, this._link)
     });
-
   }
 
   //создаем и заполняем карточку
   createCard() {
-
     this._element.querySelector('.place__title').textContent = this._name; // название картинки (title)
-
     this._cardImage = this._element.querySelector('.place__image');
     this._cardImage.src = this._link; //ссылка на картинку
     this._cardImage.alt = this._name; //alt описание к картинке

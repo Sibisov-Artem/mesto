@@ -2,7 +2,6 @@ class Api {
   constructor(options) {
     this.url = options.baseUrl;
     this.headers = options.headers;
-
   }
 
   // метод получения информации о пользователе с сервера
@@ -119,8 +118,6 @@ class Api {
         return Promise.reject(`Что-то пошло не так: ${res.status}`);
       })
   }
-
-
 }
 
 export const api = new Api({

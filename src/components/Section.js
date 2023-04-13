@@ -3,8 +3,8 @@ export default class Section {
     this._initialArray = items;
     this._renderer = renderer;
     this._container = containerSelector;
-
   }
+
   //Содержит публичный метод renderItems, который отвечает за отрисовку всех элементов.
   // Отрисовка каждого отдельного элемента должна осуществляться функцией renderer
   renderItems() {

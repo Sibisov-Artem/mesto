@@ -36,15 +36,11 @@ let userId = null;
 Promise.all([api.getUser(), api.getInitialCards()]).then(([data, cards]) => {
 
   userInfo.setUserInfo(data);
-  //  console.log(data);
   userId = data._id;
-  console.log(data);
   cards.forEach(
     (item) => {
       cardsList.addItem(createCard(item))
     });
-  console.log(cards);
-
 })
   .catch((err) => {
     console.log(err); // выведем ошибку в консоль
@@ -58,7 +54,6 @@ const profilePopupClass = new PopupWithForm('.popup_profile', (inputData) => {
   api.editUser(inputData)
     .then((data) => {
       userInfo.setUserInfo(data);
-      console.log(data)
     })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
@@ -90,21 +85,19 @@ const changeAvatarPopupClass = new PopupWithForm('.popup_avatar', (inputData) =>
   api.changeAvatar(inputData)
     .then((data) => {
       userInfo.setUserInfo(data);
-      console.log(data)
-      console.log(inputData)
     })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
     })
     .finally(() => changeAvatarPopupClass.renderLoading(false))
 });
+
 changeAvatarPopupClass.setEventListeners();
 //---------------------- попап подтверждения удаления карточки --------------//
 
 const confirmRemovePopup = new PopupConfirmationRemove('.popup_confirmation-remove', (removeCard, cardId) => {
   api.deleteCard(cardId, removeCard)
     .then(() => {
-      // console.log(removeCard);
       removeCard.deleteCard();
     })
     .catch((err) => {
@@ -113,7 +106,6 @@ const confirmRemovePopup = new PopupConfirmationRemove('.popup_confirmation-remo
 });
 
 confirmRemovePopup.setEventListeners();
-
 
 
 //---------------------------попап просмотра картинок-----------------------------
@@ -125,7 +117,6 @@ function openPreviewPopup(name, link) {
   popupWithImage.open(name, link);
 }
 
-//-------------
 
 //----------------создание карточки (экземпляр класса Card в сочетании с api ) ---------------------
 //id пользователя затолкать в Card для определения своих карт от не своих
@@ -151,12 +142,8 @@ function createCard(data) {
           console.log(err); // выведем ошибку в консоль
         });
     }
-
-
   );
   const cardElement = card.createCard();
-  // console.log(userId);
-  // console.log(data.owner._id);
   return cardElement;
 }
 
@@ -166,7 +153,6 @@ const cardsList = new Section({
   renderer: (item) => {
     const card = createCard(item);
     cardsList.addItem(card);
-
   }
 }, listForCards
 );
@@ -196,7 +182,6 @@ editProfileButton.addEventListener('click', () => {
   const userGetData = userInfo.getUserInfo();
   profileNameInput.value = userGetData.name;
   profileDescriptionInput.value = userGetData.info;
-
   profileValidator.resetValidation();
 }
 );
@@ -210,8 +195,6 @@ editAvatarButton.addEventListener('click', () => {
 //слушатель открытия попап создания новой карточки по кнопке
 newCardButton.addEventListener('click', () => {
   newCardPopupClass.open();
-  // newCardTitleInput.value = ''; //чтобы очищалось поле при открывании
-  // newCardUrlInput.value = ''; //чтобы очищалось поле при открывании
   newCardValidator.resetValidation();
 });
 
