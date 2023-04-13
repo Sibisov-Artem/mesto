@@ -13,6 +13,7 @@ export default class Card {
     this._userId = userId; //_id пользователя
     this._element = this._getTemplate();  //карточка
     this._wastebasketButton = this._element.querySelector('.place__wastebasket-btn');
+    this._likeButton = this._element.querySelector('.place__like-btn');
   }
 
   //создание копии template
@@ -34,7 +35,14 @@ export default class Card {
     if (this._userId !== this._ownerId) {
       this._wastebasketButton.remove()
     }
+  }
 
+  _checkLikeUser() {
+    if (this._likes.some((like) => like._id === this._userId)) {
+      return true
+    } else {
+      false
+    }
   }
 
   _setEventListeners = () => {
@@ -45,9 +53,9 @@ export default class Card {
     });
 
     //переключатель лайков
-    this._likeButton = this._element.querySelector('.place__like-btn');
+
     this._likeButton.addEventListener('click', () => {
-      if (this._likes.some((like) => like._id === this._userId)) {
+      if (this._checkLikeUser()) {
         this._deleteLike(this._cardId);
         this._likeButton.classList.remove('place__like-btn_active');
       } else {
@@ -72,6 +80,9 @@ export default class Card {
     //счетчик лайков
     this._likeCount = this._element.querySelector(".place__like-count");
     this._likeCount.textContent = this._likes.length; //кол-во лайков ставится из данных с сервера- по длине массива лайков
+    if (this._checkLikeUser()) {
+      this._likeButton.classList.add('place__like-btn_active');
+    }
     this._checkWastebasketButton();
 
     this._setEventListeners();
