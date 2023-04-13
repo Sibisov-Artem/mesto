@@ -54,6 +54,7 @@ Promise.all([api.getUser(), api.getInitialCards()]).then(([data, cards]) => {
 // попап профиля - форма профиля - редактирование профиля с редактированием на сервер
 // и отображением на странице в разделе профиля
 const profilePopupClass = new PopupWithForm('.popup_profile', (inputData) => {
+  profilePopupClass.renderLoading(true);
   api.editUser(inputData)
     .then((data) => {
       userInfo.setUserInfo(data);
@@ -61,22 +62,8 @@ const profilePopupClass = new PopupWithForm('.popup_profile', (inputData) => {
     })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
-    });
-
-  // const profileSaveBtn = document.querySelector('.popup__save-btn');
-
-  // profileSaveBtn.textContent = 'Сохранение...';
-
-  /*                                api.getUser(data)
-    .then((data) => {
-      userInfo.setUserInfo(data)
     })
-    .catch((err) => {
-      console.log(err);
-    })                                          */
-
-  // .finally(() => profileSaveBtn.textContent = 'Сохранить')
-
+    .finally(() => profilePopupClass.renderLoading(false))
 });
 
 profilePopupClass.setEventListeners(); // вешаем обработчики (закрытия попапа, preventDefault, сброс формы при закрытии)
@@ -84,19 +71,22 @@ profilePopupClass.setEventListeners(); // вешаем обработчики (�
 const userInfo = new UserInfo('.profile__name', '.profile__description', '.profile__avatar');
 
 const newCardPopupClass = new PopupWithForm('.popup_mesto', (inputData) => {
+  newCardPopupClass.renderLoading(true);
   api.addNewCard(inputData)
     .then((data) => {
       cardsList.addItem(createCard(data));
     })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
-    });
+    })
+    .finally(() => newCardPopupClass.renderLoading(false))
 });
 newCardPopupClass.setEventListeners();
 
 //------------------------попап изменения аватара----------------------------//
 
 const changeAvatarPopupClass = new PopupWithForm('.popup_avatar', (inputData) => {
+  changeAvatarPopupClass.renderLoading(true);
   api.changeAvatar(inputData)
     .then((data) => {
       userInfo.setUserInfo(data);
@@ -105,7 +95,8 @@ const changeAvatarPopupClass = new PopupWithForm('.popup_avatar', (inputData) =>
     })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
-    });
+    })
+    .finally(() => changeAvatarPopupClass.renderLoading(false))
 });
 changeAvatarPopupClass.setEventListeners();
 //---------------------- попап подтверждения удаления карточки --------------//
