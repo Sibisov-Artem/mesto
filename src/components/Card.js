@@ -25,9 +25,7 @@ export default class Card {
     this._element.remove();
   }
 
-  // функция переключателя лайков на карточки для createCard
-  likeClick(data) {
-    this._likeButton.classList.toggle('place__like-btn_active');
+  likeClickCount(data) {
     this._likes = data.likes;
     this._likeCount.textContent = this._likes.length;
   }
@@ -51,8 +49,10 @@ export default class Card {
     this._likeButton.addEventListener('click', () => {
       if (this._likes.some((like) => like._id === this._userId)) {
         this._deleteLikeCard(this._cardId);
+        this._likeButton.classList.remove('place__like-btn_active');
       } else {
         this._likeCard(this._cardId);
+        this._likeButton.classList.add('place__like-btn_active');
       }
     });
 

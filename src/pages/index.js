@@ -122,7 +122,7 @@ function createCard(data) {
     (cardId) => {
       api.likeCard(cardId)
         .then((data) => {
-          card.likeClick(data);
+          card.likeClickCount(data);
         })
         .catch((err) => {
           console.log(err); // выведем ошибку в консоль
@@ -131,7 +131,7 @@ function createCard(data) {
     (cardId) => {
       api.deleteLikeCard(cardId)
         .then(data => {
-          card.likeClick(data);
+          card.likeClickCount(data);
         })
         .catch((err) => {
           console.log(err); // выведем ошибку в консоль
