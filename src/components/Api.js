@@ -6,7 +6,7 @@ class Api {
 
   // _request(url, options) {       //если останется время - перереработать с применением этого
   //   return fetch(url, options).then(this._checkResponse)
-  // }
+  // } а также пройтись по остальным пунктам "можно лучше"
 
   _checkResponse(res) {
     if (res.ok) {
