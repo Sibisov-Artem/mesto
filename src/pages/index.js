@@ -15,7 +15,7 @@ import {
   newCardUrlInput,
   editAvatarButton,
   changeAvatarPopup,
-} from "../components/constants.js"
+} from "../utils/constants.js"
 
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
@@ -33,10 +33,8 @@ Promise.all([api.getUser(), api.getInitialCards()]).then(([data, cards]) => {
 
   userInfo.setUserInfo(data);
   userId = data._id;
-  cards.forEach(
-    (item) => {
-      cardsList.addItem(createCard(item))
-    });
+
+  cardsList.renderItems(cards);
 })
   .catch((err) => {
     console.log(err); // выведем ошибку в консоль
@@ -50,6 +48,7 @@ const profilePopupClass = new PopupWithForm('.popup_profile', (inputData) => {
   api.editUser(inputData)
     .then((data) => {
       userInfo.setUserInfo(data);
+      profilePopupClass.close();
     })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
@@ -66,6 +65,7 @@ const newCardPopupClass = new PopupWithForm('.popup_mesto', (inputData) => {
   api.addNewCard(inputData)
     .then((data) => {
       cardsList.addItem(createCard(data));
+      newCardPopupClass.close();
     })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
@@ -81,6 +81,7 @@ const changeAvatarPopupClass = new PopupWithForm('.popup_avatar', (inputData) =>
   api.changeAvatar(inputData)
     .then((data) => {
       userInfo.setUserInfo(data);
+      changeAvatarPopupClass.close();
     })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
@@ -95,6 +96,7 @@ const confirmRemovePopup = new PopupConfirmationRemove('.popup_confirmation-remo
   api.deleteCard(cardId, removeCard)
     .then(() => {
       removeCard.deleteCard();
+      confirmRemovePopup.close();
     })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
@@ -122,7 +124,8 @@ function createCard(data) {
     (cardId) => {
       api.addLike(cardId)
         .then((data) => {
-          card.likeClickCount(data);
+          card.countLikes(data);
+          card.addLike();
         })
         .catch((err) => {
           console.log(err); // выведем ошибку в консоль
@@ -131,7 +134,8 @@ function createCard(data) {
     (cardId) => {
       api.deleteLike(cardId)
         .then(data => {
-          card.likeClickCount(data);
+          card.countLikes(data);
+          card.deleteLike();
         })
         .catch((err) => {
           console.log(err); // выведем ошибку в консоль
@@ -144,15 +148,13 @@ function createCard(data) {
 
 //убираем заготовленный список карточек initialCards и оставляем пустой массив объектов - items: []
 const cardsList = new Section({
-  items: [],
-  renderer: (item) => {
-    const card = createCard(item);
+  renderer: (items) => {
+    const card = createCard(items);
     cardsList.addItem(card);
   }
 }, listForCards
 );
 
-cardsList.renderItems();
 
 //---------------подключение валидации к форме профиля----------------------------
 //----------------через создание экземпляра класса FormValidator------------------

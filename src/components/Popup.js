@@ -3,7 +3,6 @@ export default class Popup {
     this._popup = document.querySelector(popupSelector);
     this._handleEscClose = this._handleEscClose.bind(this);
     this._popupCloseButton = this._popup.querySelector('.popup__close-btn');
-
   }
 
   //публичные методы open и close, которые отвечают за открытие и закрытие попапа.

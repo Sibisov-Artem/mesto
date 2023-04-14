@@ -26,7 +26,7 @@ export default class Card {
     this._element.remove();
   }
 
-  likeClickCount(data) {
+  countLikes(data) {
     this._likes = data.likes;
     this._likeCount.textContent = this._likes.length;
   }
@@ -45,6 +45,14 @@ export default class Card {
     }
   }
 
+  addLike() {
+    this._likeButton.classList.add('place__like-btn_active');
+  }
+
+  deleteLike() {
+    this._likeButton.classList.remove('place__like-btn_active');
+  }
+
   _setEventListeners = () => {
     // для подтверждения удаления картинки
     // this._wastebasketButton = this._element.querySelector('.place__wastebasket-btn');
@@ -57,10 +65,8 @@ export default class Card {
     this._likeButton.addEventListener('click', () => {
       if (this._checkLikeUser()) {
         this._deleteLike(this._cardId);
-        this._likeButton.classList.remove('place__like-btn_active');
       } else {
         this._addLike(this._cardId);
-        this._likeButton.classList.add('place__like-btn_active');
       }
     });
 
