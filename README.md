@@ -3,7 +3,7 @@
 
 ---
 ## ***Описание и функциональность***
-![image](https://github.com/Sibisov-Artem/mesto/blob/main/screenshot/screenshot.png)
+![image](https://github.com/Sibisov-Artem/mesto/blob/main/screenshot/screenshot.jpg)
 
 Данный проект представляет из себя интерактивную страницу, которая позволяет пользователям делиться своими фотографиями.
 
@@ -36,7 +36,7 @@
 ### *СSS*
 * БЭМ (Nested)
 * Flexbox
-* Grid Layout;
+* Grid Layout
 * Псевдоклассы CSS
 * Анимация элементов
 * Позиционирование блоков и элементов
